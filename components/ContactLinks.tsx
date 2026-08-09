@@ -39,17 +39,19 @@ const items = [
 
 export function ContactLinks() {
   return (
-    <div className="grid border-l border-t border-black md:grid-cols-2">
+    <div className="grid border-l border-t border-[var(--line)] md:grid-cols-2">
       {items.map((item, index) => {
         const content = (
           <>
-            <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider">
+            <div className="label flex items-center justify-between">
               <span>{item.key}</span>
               <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <p className="mt-8 text-lg font-semibold">{item.label}</p>
-            <p className="mt-2 text-sm text-[var(--muted)]">{item.note}</p>
-            <div className="mt-6 flex items-center justify-between border-t border-current pt-3 font-mono text-xs font-bold uppercase tracking-wider">
+            <p className="row-muted group-hover:text-[var(--panel-muted)] mt-2 text-sm">
+              {item.note}
+            </p>
+            <div className="label rule mt-6 flex items-center justify-between pt-3">
               <span>
                 {item.key === "Location"
                   ? "Ames, Iowa"
@@ -66,7 +68,7 @@ export function ContactLinks() {
           return (
             <div
               key={item.key}
-              className="border-b border-r border-black bg-[var(--surface)] p-6"
+              className="group border-b border-r border-[var(--line)] bg-[var(--surface)] p-6"
             >
               {content}
             </div>
@@ -81,7 +83,7 @@ export function ContactLinks() {
             href={item.href}
             target={external ? "_blank" : undefined}
             rel={external ? "noreferrer" : undefined}
-            className="border-b border-r border-black bg-[var(--surface)] p-6 transition hover:bg-black hover:text-white"
+            className="group border-b border-r border-[var(--line)] bg-[var(--surface)] p-6 hover:bg-[var(--panel-bg)] hover:text-[var(--panel-text)]"
           >
             {content}
           </a>

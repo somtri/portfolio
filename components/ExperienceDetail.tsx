@@ -14,99 +14,122 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
       ? formatExperienceDate(experience.endDate)
       : "";
 
+  const hasPipeline = Boolean(experience.pipeline?.length);
+  const workedIndex = hasPipeline ? 4 : 3;
+  const toolsIndex = workedIndex + 1;
+
   return (
     <article className="site-container pb-20">
-      <div className="grid gap-5 lg:grid-cols-[1fr_20rem]">
-        <div className="border border-black bg-[var(--surface)] p-6 sm:p-10">
-          <div className="flex flex-wrap gap-2">
-            <Tag>{experience.category}</Tag>
-            {experience.current ? <Tag>Current</Tag> : null}
-          </div>
-          <h1 className="text-balance mt-6 font-mono text-4xl font-black uppercase leading-[0.95] tracking-[-0.055em] sm:text-6xl">
-            {experience.title}
-          </h1>
-          <p className="text-pretty mt-6 max-w-3xl text-xl leading-8 text-[var(--muted)]">
-            {experience.summary}
-          </p>
+      <div data-reveal>
+        <p className="label row-muted">
+          [ {experience.category}
+          {experience.current ? " / Current" : ""} ]
+        </p>
+        <h1 className="page-title text-balance mt-4">{experience.title}</h1>
+        <p className="text-pretty row-muted mt-5 max-w-3xl text-xl leading-8">
+          {experience.summary}
+        </p>
+        <div className="rule-strong mt-8" />
+      </div>
+
+      <div className="mt-10 grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_15rem]">
+        <div>
+          <TextSection index="01" title="Overview">
+            {experience.overview}
+          </TextSection>
+          <TextSection index="02" title="Technical focus" className="mt-10">
+            {experience.technicalFocus}
+          </TextSection>
+
+          {hasPipeline ? (
+            <div className="ink-panel mt-10 p-6 sm:p-8">
+              <p className="label text-[var(--panel-muted)]">03 / Pipeline</p>
+              <ol className="mt-4 grid gap-0 md:grid-cols-3">
+                {experience.pipeline!.map((step, index) => (
+                  <li
+                    key={step}
+                    className="flex items-start justify-between gap-3 border-t border-[var(--panel-line)] py-3 pr-4 font-mono text-xs font-medium uppercase leading-5 tracking-wider md:border-t-0 md:border-l md:pl-4 md:first:border-l-0"
+                  >
+                    <span>{step}</span>
+                    <span className="text-[var(--panel-muted)]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ) : null}
+
+          <section className="rule-strong mt-10 pt-4">
+            <p className="label row-muted">
+              {String(workedIndex).padStart(2, "0")} / What I worked on
+            </p>
+            <ul className="mt-4">
+              {experience.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  className="rule grid grid-cols-[auto_1fr] gap-3 py-3 leading-7"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-2.5 h-1.5 w-1.5 bg-[var(--ink)]"
+                  />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="rule-strong mt-10 pt-4">
+            <p className="label row-muted">
+              {String(toolsIndex).padStart(2, "0")} / Tools and topics
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {experience.techStack.map((tech) => (
+                <Tag key={tech}>{tech}</Tag>
+              ))}
+            </div>
+          </section>
         </div>
 
-        <aside className="border border-black bg-black p-6 text-white">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-zinc-400">
-            Role index
-          </p>
-          <dl className="mt-6 space-y-5">
-            <MetaItem label="Role" value={experience.role} />
-            <MetaItem label="Organization" value={experience.organization} />
-            <MetaItem
-              label="Dates"
-              value={`${formatExperienceDate(experience.startDate)} - ${end}`}
-            />
+        <aside className="self-start lg:sticky lg:top-24">
+          <dl>
+            <div className="rule pt-3 [&:not(:first-child)]:mt-3">
+              <dt className="label row-muted">Role</dt>
+              <dd className="mt-1 text-sm leading-6">{experience.role}</dd>
+            </div>
+            <div className="rule pt-3 [&:not(:first-child)]:mt-3">
+              <dt className="label row-muted">Organization</dt>
+              <dd className="mt-1 text-sm leading-6">
+                {experience.organization}
+              </dd>
+            </div>
+            <div className="rule pt-3 [&:not(:first-child)]:mt-3">
+              <dt className="label row-muted">Dates</dt>
+              <dd className="mt-1 text-sm leading-6">
+                {formatExperienceDate(experience.startDate)} - {end}
+              </dd>
+            </div>
             {experience.location ? (
-              <MetaItem label="Location" value={experience.location} />
+              <div className="rule pt-3 [&:not(:first-child)]:mt-3">
+                <dt className="label row-muted">Location</dt>
+                <dd className="mt-1 text-sm leading-6">
+                  {experience.location}
+                </dd>
+              </div>
             ) : null}
           </dl>
+          {experience.links?.github ? (
+            <div className="mt-6">
+              <Button href={experience.links.github} className="w-full">
+                GitHub
+              </Button>
+            </div>
+          ) : null}
         </aside>
       </div>
 
-      <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
-        <TextSection index="01" title="Overview">
-          {experience.overview}
-        </TextSection>
-        <TextSection index="02" title="Technical focus">
-          {experience.technicalFocus}
-        </TextSection>
-      </div>
-
-      {experience.pipeline?.length ? (
-        <section className="mt-12 border border-black bg-black p-6 text-white sm:p-8">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-zinc-400">
-            03 / Pipeline
-          </p>
-          <ol className="mt-6 grid gap-3 md:grid-cols-3">
-            {experience.pipeline.map((step, index) => (
-              <li
-                key={step}
-                className="flex min-h-24 items-start justify-between gap-4 border border-zinc-600 p-4 font-mono text-xs font-bold uppercase leading-5 tracking-wider"
-              >
-                <span>{step}</span>
-                <span className="text-zinc-500">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      ) : null}
-
-      <section className="mt-12 border-t border-black pt-5">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-          {experience.pipeline?.length ? "04" : "03"} / What I worked on
-        </p>
-        <ul className="mt-6 grid gap-4 md:grid-cols-2">
-          {experience.bullets.map((bullet) => (
-            <li
-              key={bullet}
-              className="grid grid-cols-[auto_1fr] gap-3 border border-black bg-[var(--surface)] p-5 leading-7"
-            >
-              <span aria-hidden="true" className="mt-2.5 h-2 w-2 bg-black" />
-              <span>{bullet}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-12 border border-black bg-[var(--surface)] p-6 sm:p-8">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-          {experience.pipeline?.length ? "05" : "04"} / Tools and topics
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {experience.techStack.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </div>
-      </section>
-
-      <div className="mt-10 flex flex-wrap gap-3 border-t border-black pt-6">
+      <div className="rule-strong mt-12 flex flex-wrap gap-3 pt-6">
         {experience.links?.github ? (
           <Button href={experience.links.github}>GitHub</Button>
         ) : null}
@@ -118,32 +141,25 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
   );
 }
 
-function MetaItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-b border-zinc-700 pb-4">
-      <dt className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.16em] text-zinc-500">
-        {label}
-      </dt>
-      <dd className="mt-2 text-sm leading-6">{value}</dd>
-    </div>
-  );
-}
-
 function TextSection({
   index,
   title,
+  className,
   children,
 }: {
   index: string;
   title: string;
+  className?: string;
   children: string;
 }) {
   return (
-    <section className="border-t border-black pt-5">
-      <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+    <section className={`rule-strong pt-4 ${className ?? ""}`}>
+      <p className="label row-muted">
         {index} / {title}
       </p>
-      <p className="text-pretty mt-4 text-lg leading-8">{children}</p>
+      <p className="text-pretty mt-4 max-w-4xl text-lg leading-8">
+        {children}
+      </p>
     </section>
   );
 }
