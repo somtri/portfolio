@@ -3,14 +3,16 @@
 My personal portfolio for software engineering, applied AI, quantitative
 research, research software, and data systems work.
 
-Live site: [som-tripathi.vercel.app](https://som-tripathi.vercel.app)
+Live site: [somtripathi.dev](https://somtripathi.dev) (deployed on Vercel)
 
 ## Overview
 
 I built this site to keep my projects, research experience, resume, and contact
 information in one place. The portfolio is statically generated with Next.js
 and uses typed local data, so project and experience content can be updated
-without a database or content management system.
+without a database or content management system. It also includes a grounded
+AI assistant at `/ask` that answers questions about my projects, experience,
+and resume from the site's own content.
 
 The interface uses a monochrome visual system with strong typography, grid
 details, clear borders, responsive layouts, and light and dark themes.
@@ -60,6 +62,11 @@ responsibilities, tools, and relevant repository links.
 - Typed content models for projects, experience, profile, skills, and resume
 - Keyboard navigation, visible focus states, semantic markup, and reduced-motion
   support
+- Grounded AI assistant at `/ask`: RAG-lite retrieval over the site's typed
+  content — build-time embeddings, cosine top-k with a similarity-gated
+  refusal, citation validation, per-IP rate limiting; falls back to
+  full-context when retrieval is unavailable
+- Martian Mono and IBM Plex Sans, self-hosted via `next/font`
 
 ## Tech Stack
 
@@ -72,14 +79,21 @@ responsibilities, tools, and relevant repository links.
 - pnpm
 - Vercel
 
+Runtime dependencies stay at next/react/react-dom only — the assistant uses
+plain fetch adapters (OpenAI-compatible chat: Groq by default; embeddings:
+Cloudflare Workers AI), no AI SDKs.
+
 ## Project Structure
 
 ```text
 app/          App Router pages and global styles
+app/api/      Assistant endpoint (/api/ask)
 components/   Shared layout, content, and UI components
 data/         Profile, project, experience, skills, and resume content
 lib/          Project and experience lookup helpers
+lib/assistant/ Assistant retrieval, grounding, and rate limiting
 public/       Resume and public assets
+scripts/      Build-time corpus embedding
 tests/        Project and experience data tests
 types/        TypeScript content models
 ```
@@ -109,17 +123,39 @@ pnpm typecheck  # Run the TypeScript compiler
 pnpm test       # Run the Vitest test suite
 pnpm build      # Create an optimized production build
 pnpm start      # Run the production build locally
+pnpm embed      # embed the content corpus (needs Cloudflare env vars; optional — site falls back to full-context)
 ```
 
 ## Deployment
 
-The portfolio is deployed on Vercel. The application uses static content and
-does not require a database, backend service, or runtime API routes.
+The portfolio is deployed on Vercel. It's static pages plus one serverless
+route, `/api/ask`, for the assistant. No database.
+
+### Assistant setup
+
+- Create a Groq API key at [console.groq.com](https://console.groq.com) and a
+  Cloudflare API token with Workers AI access at
+  [dash.cloudflare.com](https://dash.cloudflare.com), and note the Cloudflare
+  account ID.
+- In Vercel: Project → Settings → Environment Variables → add each variable
+  from `.env.example` with its real value — `ASSISTANT_BASE_URL`,
+  `ASSISTANT_MODEL`, `ASSISTANT_API_KEY`, `EMBEDDINGS_ACCOUNT_ID`,
+  `EMBEDDINGS_API_TOKEN`, `EMBEDDINGS_MODEL` — scoped to Production (and
+  Preview if I want it there too). These are server-side only; no key is ever
+  exposed to the browser.
+- I can run `pnpm embed` locally (with the same env vars in `.env.local`) and
+  commit nothing — `lib/assistant/vectors.json` is gitignored. Without it the
+  assistant runs in full-context mode; with it, retrieval activates. To
+  activate retrieval in production, `pnpm embed` needs to run during the
+  build — that's a follow-up I still need to wire into the build command, not
+  part of this pass.
+- An NVIDIA API key works for local development via the commented base URL in
+  `.env.example`, but NVIDIA's API Trial ToS does not permit free-tier
+  production use.
 
 ## Future Work
 
 - Add more project screenshots, architecture diagrams, and demo GIFs.
-- Add a grounded AI portfolio assistant for answering questions about my projects and experience.
 - Add GitHub API integration for live repository metadata.
 - Add project search and keyboard navigation.
 - Add short technical notes for selected research and quantitative finance projects.

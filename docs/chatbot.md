@@ -120,3 +120,11 @@ Assume someone tries to drain the key.
 - **Client-side provider calls:** the key would reach the browser.
 - **Floating chat widget:** template tell; `/ask` page instead (redesign doc).
 - **Multi-turn conversation memory (v1):** token spend and injection surface grow with history; single-turn covers the goal. Revisit if real usage shows follow-up questions failing.
+
+## Changed during build (2026-08-08)
+
+- Final env-var names, as implemented in `.env.example`: `ASSISTANT_BASE_URL`, `ASSISTANT_MODEL`, `ASSISTANT_API_KEY` (chat); `EMBEDDINGS_ACCOUNT_ID`, `EMBEDDINGS_API_TOKEN`, `EMBEDDINGS_MODEL` (embeddings, Cloudflare-shaped — account ID + token, not the generic `EMBEDDINGS_BASE_URL`/`EMBEDDINGS_API_KEY` pair this doc's §3 describes). Optional: `ASSISTANT_MIN_SIMILARITY`.
+- The route is split as designed: `lib/assistant/handler.ts` holds the testable core (`handleAsk`, deps injected), and `app/api/ask/route.ts` is a thin adapter that parses the request, checks same-origin, extracts the IP, and wires the real corpus/vectors/embed/chat/rate-limit implementations into it.
+- `lib/assistant/vectors.json` is the build-time vectors file; it's gitignored (`/lib/assistant/vectors.json`). Its absence is not an error — `handleAsk` falls back to full-context. Running `pnpm embed` generates it locally to activate retrieval; the file itself is never committed.
+- Gitignore fix: `.env*` was blanket-ignoring `.env.example` too. Added `!.env.example` after it so the template stays tracked.
+- Everything else in this doc's architecture (§3), grounding contract (§4), and abuse protections (§5) matches the implementation as read.

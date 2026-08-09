@@ -68,3 +68,9 @@ Light and dark themes, keyboard navigation, visible focus states, skip link, sem
 - **Command-menu / ASCII ornament layer** — fashion, not load-bearing; adds chrome without signal.
 - **Buying Berkeley Mono** — license terms unverifiable at the primary source today; two verified-free OFL families meet the bar.
 - **Floating chat widget** — template tell; `/ask` page instead.
+
+## Changed during build (2026-08-08)
+
+- The retired card components — `SkillMatrix`, `PixelCard`, `SectionLabel` — are deleted from `components/`; the data they read from (`data/skills.ts` and others) is untouched.
+- The ink-panel inversion surface (`.ink-panel`, used by the footer) flips its colors with the theme by design: `--panel-bg`/`--panel-text` are dark-on-light in the light theme and light-on-dark in the dark theme, so the footer stays visually inverted relative to the page in both themes.
+- The reveal stagger runs through per-row `transitionDelay` inline styles (see `components/IndexRow.tsx`) on elements marked `data-reveal`, driven by the existing IntersectionObserver system in `components/PageMotion.tsx` — no new animation library.
