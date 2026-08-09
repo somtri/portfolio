@@ -44,3 +44,6 @@ next-env.d.ts
 /STATE.md
 /.claude/
 /.memsearch/
+
+# generated assistant embeddings (build-time artifact; full-context fallback covers its absence)
+/lib/assistant/vectors.json

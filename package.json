@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --configLoader runner --root ."
+    "test": "vitest run --configLoader runner --root .",
+    "embed": "tsx scripts/embed-corpus.ts"
   },
   "dependencies": {
     "next": "16.2.7",
@@ -27,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
     "tailwindcss": "^4",
+    "tsx": "^4",
     "typescript": "^5",
     "vitest": "^3"
   }
