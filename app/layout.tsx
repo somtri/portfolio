@@ -39,9 +39,9 @@ export default function RootLayout({
         <PageMotion />
         <a
           href="#main-content"
-          className="fixed left-4 top-4 z-[100] -translate-y-24 border border-[var(--line-strong)] bg-[var(--surface)] text-[var(--ink)] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider focus:translate-y-0"
+          className="fixed left-4 top-4 z-[100] -translate-y-24 border border-[var(--line-strong)] bg-[var(--surface)] px-4 py-2 text-xs font-bold text-[var(--ink)] tracking-wider focus:translate-y-0"
         >
-          Skip to content
+          skip to content
         </a>
         <Navbar />
         <main id="main-content" className="flex-1">

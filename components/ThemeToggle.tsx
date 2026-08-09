@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useSyncExternalStore } from "react";
+import { cn } from "@/lib/utils";
 
 type Theme = "light" | "dark";
 
@@ -17,10 +18,11 @@ function getTheme(): Theme {
 
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getTheme, () => "light");
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const lightRef = useRef<HTMLButtonElement>(null);
+  const darkRef = useRef<HTMLButtonElement>(null);
 
-  function toggleTheme() {
-    const nextTheme: Theme = theme === "light" ? "dark" : "light";
+  function setTheme(nextTheme: Theme, buttonEl: HTMLButtonElement | null) {
+    if (nextTheme === theme) return;
     const root = document.documentElement;
 
     const applyTheme = () => {
@@ -37,9 +39,9 @@ export function ThemeToggle() {
       !reduceMotion &&
       typeof document.startViewTransition === "function" &&
       document.visibilityState === "visible" &&
-      buttonRef.current
+      buttonEl
     ) {
-      const rect = buttonRef.current.getBoundingClientRect();
+      const rect = buttonEl.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
       const y = rect.top + rect.height / 2;
       const radius = Math.hypot(
@@ -62,27 +64,26 @@ export function ThemeToggle() {
     }, 350);
   }
 
-  const isDark = theme === "dark";
-
   return (
-    <button
-      ref={buttonRef}
-      type="button"
-      role="switch"
-      aria-checked={isDark}
-      aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
-      title={`Switch to ${isDark ? "light" : "dark"} theme`}
-      onClick={toggleTheme}
-      className="theme-toggle"
-    >
-      <span className="sr-only">
-        {isDark ? "Dark theme active" : "Light theme active"}
-      </span>
-      <span aria-hidden="true" className="theme-toggle__track">
-        <span className="theme-toggle__sun">L</span>
-        <span className="theme-toggle__moon">D</span>
-        <span className="theme-toggle__thumb" />
-      </span>
-    </button>
+    <span className="inline-flex items-center gap-0" role="group" aria-label="Theme">
+      <button
+        ref={lightRef}
+        type="button"
+        aria-pressed={theme === "light"}
+        onClick={() => setTheme("light", lightRef.current)}
+        className={cn("mode-pill", theme === "light" && "mode-pill--active")}
+      >
+        light
+      </button>
+      <button
+        ref={darkRef}
+        type="button"
+        aria-pressed={theme === "dark"}
+        onClick={() => setTheme("dark", darkRef.current)}
+        className={cn("mode-pill", theme === "dark" && "mode-pill--active")}
+      >
+        dark
+      </button>
+    </span>
   );
 }
