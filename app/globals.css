@@ -297,6 +297,12 @@ a {
 }
 
 .motion-ready [data-reveal] {
+  transition-property: opacity, transform;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+}
+
+.motion-ready [data-reveal] {
   opacity: 0;
   transform: translateY(1.5rem);
 }
