@@ -1,14 +1,21 @@
 import Link from "next/link";
 import { ExperienceIndex } from "@/components/ExperienceIndex";
 import { ProjectIndex } from "@/components/ProjectIndex";
+import { ReactiveHeadline } from "@/components/ReactiveHeadline";
 import { profile } from "@/data/profile";
 
 export default function Home() {
   return (
     <>
-      <section className="site-container pt-14 sm:pt-24" data-reveal>
+      <section
+        className="site-container overflow-x-hidden pt-14 sm:pt-24"
+        data-reveal
+        data-headline-zone
+      >
         <p className="label row-muted">Software / AI / Quant / Research</p>
-        <h1 className="display-name mt-4">{profile.name}</h1>
+        <h1 className="display-name mt-4" aria-label={profile.name}>
+          <ReactiveHeadline name={profile.name} />
+        </h1>
         <p className="label mt-6 max-w-3xl leading-5">{profile.title}</p>
         <p className="text-pretty row-muted mt-5 max-w-2xl text-lg leading-8">
           {profile.shortBio}

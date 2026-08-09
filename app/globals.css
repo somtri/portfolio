@@ -367,6 +367,31 @@ a {
   transition-duration: 300ms !important;
 }
 
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: theme-radial-sweep 300ms var(--ease-spring);
+}
+
+@keyframes theme-radial-sweep {
+  from {
+    clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--vt-radius, 150%) at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 .text-pretty {
   text-wrap: pretty;
 }
