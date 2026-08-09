@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExperienceTimeline } from "@/components/ExperienceTimeline";
+import { ExperienceIndex } from "@/components/ExperienceIndex";
 import { PageHeader } from "@/components/PageHeader";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function ExperiencePage() {
         summary="Select a role to explore the research context, methods, pipeline, tools, and concrete contributions behind the work."
       />
       <section className="site-container pb-20">
-        <ExperienceTimeline />
+        <ExperienceIndex />
       </section>
     </>
   );

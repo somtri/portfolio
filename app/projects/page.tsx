@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
-import { ProjectGrid } from "@/components/ProjectGrid";
-import { projects } from "@/data/projects";
+import { ProjectIndex } from "@/components/ProjectIndex";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -17,7 +16,7 @@ export default function ProjectsPage() {
         summary="Software projects across real-time monitoring, financial machine learning, systems programming, static web architecture, predictive modeling, and economic forecasting."
       />
       <section className="site-container pb-20">
-        <ProjectGrid projects={projects} />
+        <ProjectIndex />
       </section>
     </>
   );
