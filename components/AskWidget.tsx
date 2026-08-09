@@ -18,6 +18,16 @@ const LABELS = [
   "som --help_",
   "what's on your mind?_",
   "wanna know more about som?_",
+  "som's looking hireable rn_",
+  "works on my machine_",
+  "segfault-free since 2005_",
+  "fluent in rust and sarcasm_",
+  "will code for coffee_",
+  "talk data to me_",
+  "what's som building rn?_",
+  "why quant finance?_",
+  "curious about the cv research?_",
+  "som --resume_",
 ];
 
 const DOT_HOLD_MS = 1500;

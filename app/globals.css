@@ -377,7 +377,7 @@ a {
   max-width: 400px;
   overflow: hidden;
   border: 1px solid var(--line-strong);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--ink);
   padding: 0 22px;
@@ -442,7 +442,6 @@ a {
 @keyframes ask-dialog-in {
   0% {
     opacity: 0;
-    border-radius: 2rem;
     transform: scale(0.12);
   }
   33% {
@@ -450,7 +449,6 @@ a {
   }
   100% {
     opacity: 1;
-    border-radius: 0;
     transform: scale(1);
   }
 }

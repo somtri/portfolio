@@ -20,10 +20,10 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-[var(--paper)]">
       <div className="site-container flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] py-4 text-xs text-[var(--muted)]">
-        <span>
+        <Link href="/" aria-label="home">
           <span className="font-bold text-[var(--ink)]">som@portfolio</span>
           : ~
-        </span>
+        </Link>
         <span className="flex flex-wrap items-center gap-5">
           <span className="text-[var(--faint)]">
             [ 42.026&deg;n 93.646&deg;w &middot; ames, ia ]
