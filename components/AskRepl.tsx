@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import Link from "next/link";
 import { SUGGESTED_QUESTIONS, useAsk } from "@/components/useAsk";
+import { TerminalSkeleton } from "@/components/TerminalSkeleton";
 import {
   RESUME_HREF,
   detectEasterEgg,
@@ -110,10 +111,15 @@ export function AskRepl() {
         className="border-t border-[var(--line)] px-6 py-4 text-[13.5px]"
       >
         {loading ? (
-          <p className="flex items-center text-[var(--muted)]">
-            …querying index
-            <span className="ask-cursor" aria-hidden="true" />
-          </p>
+          <div>
+            <p className="flex items-center text-[var(--muted)]">
+              …querying index
+              <span className="ask-cursor" aria-hidden="true" />
+            </p>
+            <div className="mt-3">
+              <TerminalSkeleton rows={[56, 44, 28]} />
+            </div>
+          </div>
         ) : null}
 
         {!loading && egg ? (

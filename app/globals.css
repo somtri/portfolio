@@ -508,6 +508,31 @@ a {
   }
 }
 
+.terminal-skeleton {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.terminal-skeleton__row {
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  color: var(--line-strong);
+  animation: skel-pulse 1s steps(2, jump-none) infinite;
+}
+
+@keyframes skel-pulse {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.45;
+  }
+}
+
 .hero-wordmark {
   font-family: var(--font-display), var(--font-hack), monospace;
   font-weight: 700;
