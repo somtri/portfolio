@@ -539,7 +539,6 @@ a {
   height: 0.78em;
   margin-left: 0.06em;
   background: var(--accent);
-  vertical-align: text-bottom;
   animation: hero-cursor-blink 1.1s steps(1, end) infinite;
 }
 
