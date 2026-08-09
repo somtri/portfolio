@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AskWidget } from "@/components/AskWidget";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PageMotion } from "@/components/PageMotion";
@@ -47,6 +48,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <AskWidget />
       </body>
     </html>
   );
