@@ -36,6 +36,7 @@ export function ThemeToggle() {
     if (
       !reduceMotion &&
       typeof document.startViewTransition === "function" &&
+      document.visibilityState === "visible" &&
       buttonRef.current
     ) {
       const rect = buttonRef.current.getBoundingClientRect();
@@ -48,7 +49,8 @@ export function ThemeToggle() {
       root.style.setProperty("--vt-x", `${x}px`);
       root.style.setProperty("--vt-y", `${y}px`);
       root.style.setProperty("--vt-radius", `${radius}px`);
-      document.startViewTransition(applyTheme);
+      const transition = document.startViewTransition(applyTheme);
+      transition.finished.catch(() => {});
       return;
     }
 

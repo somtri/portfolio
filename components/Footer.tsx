@@ -4,7 +4,7 @@ import { profile } from "@/data/profile";
 export function Footer() {
   return (
     <footer className="ink-panel border-t border-[var(--panel-line)] pb-20 pt-5 sm:py-5">
-      <div className="site-container flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+      <div className="site-container flex flex-wrap items-center justify-between gap-x-8 gap-y-4 sm:pr-18">
         <p className="font-mono text-xs tracking-[0.16em] text-[var(--panel-muted)]">
           {profile.name} · {profile.location} · {profile.university}
         </p>
