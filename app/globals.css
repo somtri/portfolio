@@ -336,6 +336,10 @@ a {
   outline-offset: 3px;
 }
 
+.ink-panel :focus-visible {
+  outline-color: var(--accent-panel);
+}
+
 .site-container {
   width: min(1180px, calc(100% - 2rem));
   margin-inline: auto;
@@ -403,7 +407,10 @@ a {
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
-  *::after {
+  *::after,
+  .theme-transitioning *,
+  .theme-transitioning *::before,
+  .theme-transitioning *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;

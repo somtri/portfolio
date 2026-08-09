@@ -78,3 +78,4 @@ D-006: stack keep re-affirmed with measurements (closes reopened D-001). D-007: 
 2. Signature headline is widen-only (wdth 80→100): the resting weight already sits at Martian Mono's wght ceiling (800), so "thicken" had no headroom; wdth capped at 100 (conservative overflow margin).
 3. Tuned accent values: dark-theme `--accent` #5e77f7 (4.8–5.1:1 on dark surfaces), light-theme `--accent-panel` #2e4ef4 (3.16:1 on the ink panel); light `--accent` #2547F4 as approved.
 4. Surface tokens unchanged (the §2.5 "warmer surface contrast" idea was deliberately dropped — restraint).
+5. The widget's loading caret blink is a 1s infinite opacity loop — the one deliberate exception to the <=300ms motion rule (terminal caret convention, loading-state only, fully disabled under reduced motion).

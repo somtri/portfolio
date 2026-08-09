@@ -69,14 +69,15 @@ export function AskWidget() {
 
     const trimmed = question.trim();
 
-    if (/^som\s+--/.test(trimmed)) {
+    if (/^som\s+--/i.test(trimmed)) {
       setResult(null);
       setError(null);
 
-      if (/^som\s+--resume\s*$/.test(trimmed)) {
+      const trimmedLower = trimmed.toLowerCase();
+      if (/^som\s+--resume\s*$/i.test(trimmedLower)) {
         window.open(RESUME_HREF, "_blank", "noreferrer");
         setEgg({ kind: "resume", raw: trimmed });
-      } else if (/^som\s+--help\s*$/.test(trimmed)) {
+      } else if (/^som\s+--help\s*$/i.test(trimmedLower)) {
         setEgg({ kind: "help", raw: trimmed });
       } else {
         setEgg({ kind: "unknown", raw: trimmed });
