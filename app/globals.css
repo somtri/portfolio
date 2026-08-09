@@ -1,42 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f1efe8;
-  --surface: #fbfaf6;
-  --ink: #11110f;
-  --muted: #5f5e58;
-  --line: #c9c6bc;
-  --line-strong: #11110f;
-  --soft: #e6e3da;
-  --grid-line: rgba(17, 17, 15, 0.04);
-  --nav-bg: rgba(241, 239, 232, 0.92);
-  --panel-bg: #11110f;
-  --panel-text: #f2f0e9;
-  --panel-muted: #a8a59c;
-  --panel-line: #3a3934;
-  --accent: #2547f4;
-  --on-accent: #fbfaf6;
-  --accent-panel: #2e4ef4;
+  --paper: #ffffff;
+  --surface: #f3f3f3;
+  --ink: #000000;
+  --muted: rgba(0, 0, 0, 0.68);
+  --line: rgba(0, 0, 0, 0.12);
+  --line-strong: rgba(0, 0, 0, 0.3);
+  --accent: #0b76cc;
+  --faint: rgba(0, 0, 0, 0.45);
+  --live: #0a7a46;
+  /* legacy v2 tokens - retired during v3 rollout */
+  --soft: #f3f3f3;
+  --grid-line: transparent;
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --panel-bg: #000000;
+  --panel-text: #ffffff;
+  --panel-muted: rgba(255, 255, 255, 0.7);
+  --panel-line: rgba(255, 255, 255, 0.12);
+  --on-accent: #ffffff;
+  --accent-panel: #0b76cc;
   color-scheme: light;
 }
 
 html[data-theme="dark"] {
-  --paper: #0c0c0b;
-  --surface: #141412;
-  --ink: #f2f0e9;
-  --muted: #a8a59c;
-  --line: #3a3934;
-  --line-strong: #f2f0e9;
-  --soft: #22221f;
-  --grid-line: rgba(242, 240, 233, 0.05);
-  --nav-bg: rgba(12, 12, 11, 0.92);
-  --panel-bg: #f2f0e9;
-  --panel-text: #11110f;
-  --panel-muted: #5f5e58;
-  --panel-line: #c9c6bc;
-  --accent: #5e77f7;
-  --on-accent: #11110f;
-  --accent-panel: #2547f4;
+  --paper: #000000;
+  --surface: #1f1f1f;
+  --ink: #ffffff;
+  --muted: rgba(255, 255, 255, 0.7);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.25);
+  --accent: #2f6bff;
+  --faint: rgba(255, 255, 255, 0.42);
+  --live: #2ee58a;
+  /* legacy v2 tokens - retired during v3 rollout */
+  --soft: #1f1f1f;
+  --grid-line: transparent;
+  --nav-bg: rgba(0, 0, 0, 0.92);
+  --panel-bg: #ffffff;
+  --panel-text: #000000;
+  --panel-muted: rgba(0, 0, 0, 0.68);
+  --panel-line: rgba(0, 0, 0, 0.12);
+  --on-accent: #ffffff;
+  --accent-panel: #2f6bff;
   color-scheme: dark;
 }
 
@@ -66,8 +72,12 @@ html[data-theme="dark"] {
 @theme inline {
   --color-background: var(--paper);
   --color-foreground: var(--ink);
-  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
-  --font-mono: var(--font-martian), "Courier New", monospace;
+  --font-sans: var(--font-hack), "Courier New", monospace;
+  --font-mono: var(--font-hack), "Courier New", monospace;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-hack), monospace;
 }
 
 * {
@@ -82,15 +92,12 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  background:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-    var(--paper);
-  background-size: 40px 40px;
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-plex-sans), system-ui, sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-family: var(--font-hack), "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  text-transform: lowercase;
 }
 
 :where(

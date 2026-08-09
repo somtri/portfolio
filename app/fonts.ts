@@ -1,15 +1,30 @@
-import { IBM_Plex_Sans, Martian_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
-export const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-plex-sans",
+export const hack = localFont({
+  src: [
+    {
+      path: "./fonts/hack-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/hack-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-hack",
   display: "swap",
 });
 
-export const martianMono = Martian_Mono({
-  subsets: ["latin"],
-  variable: "--font-martian",
+export const spaceGrotesk = localFont({
+  src: [
+    {
+      path: "./fonts/space-grotesk-700.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-display",
   display: "swap",
 });

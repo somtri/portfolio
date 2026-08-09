@@ -1,0 +1,5 @@
+Hack — MIT License + Bitstream Vera License
+https://github.com/source-foundry/Hack
+
+Space Grotesk — SIL Open Font License 1.1
+https://github.com/floriankarsten/space-grotesk

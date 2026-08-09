@@ -3,7 +3,7 @@ import { AskWidget } from "@/components/AskWidget";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PageMotion } from "@/components/PageMotion";
-import { martianMono, plexSans } from "./fonts";
+import { hack, spaceGrotesk } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,15 +23,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="light"
+      data-theme="dark"
       suppressHydrationWarning
-      className={`${plexSans.variable} ${martianMono.variable}`}
+      className={`${hack.variable} ${spaceGrotesk.variable}`}
     >
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html:
-              'try{document.documentElement.dataset.theme=localStorage.getItem("portfolio-theme")==="dark"?"dark":"light"}catch(e){}',
+              'try{document.documentElement.dataset.theme=localStorage.getItem("portfolio-theme")==="light"?"light":"dark"}catch(e){}',
           }}
         />
       </head>
