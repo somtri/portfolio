@@ -38,3 +38,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# session/working files (local only)
+/handoff.md
+/STATE.md
+/.claude/
+/.memsearch/
