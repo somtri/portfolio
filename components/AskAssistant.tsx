@@ -89,7 +89,7 @@ export function AskAssistant() {
                   <Link
                     key={citation.cite}
                     href={citation.href}
-                    className="label hover:underline underline-offset-4"
+                    className="ask-chip label"
                   >
                     [ {citation.cite} ]
                   </Link>

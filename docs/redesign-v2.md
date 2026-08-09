@@ -71,3 +71,10 @@ Zero new runtime dependencies: `linear()` easing, View Transitions, `font-variat
 ## 6. Ledger entries on approval
 
 D-006: stack keep re-affirmed with measurements (closes reopened D-001). D-007: v2 direction (supersedes D-005's monochrome constraint; type and IA carried forward). D-008: assistant surface = floating widget, /ask retained, backend unchanged.
+
+## Changed during build (2026-08-08)
+
+1. Page-navigation view transitions deferred: Next 16.2.7 exposes `experimental.viewTransition`, but it requires React's `<ViewTransition>` component, which stable React 19.2.4 does not ship (Canary-only). The theme-toggle radial sweep DID ship via `document.startViewTransition`. Revisit when React ships ViewTransition stable.
+2. Signature headline is widen-only (wdth 80→100): the resting weight already sits at Martian Mono's wght ceiling (800), so "thicken" had no headroom; wdth capped at 100 (conservative overflow margin).
+3. Tuned accent values: dark-theme `--accent` #5e77f7 (4.8–5.1:1 on dark surfaces), light-theme `--accent-panel` #2e4ef4 (3.16:1 on the ink panel); light `--accent` #2547F4 as approved.
+4. Surface tokens unchanged (the §2.5 "warmer surface contrast" idea was deliberately dropped — restraint).

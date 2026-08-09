@@ -35,7 +35,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           </TextSection>
 
           <section className="rule-strong mt-10 pt-4">
-            <p className="label row-muted">03 / What I built</p>
+            <p className="label row-muted">
+              <span className="text-[var(--accent)]">03</span> / What I built
+            </p>
             <ul className="mt-4">
               {project.built.map((item) => (
                 <li
@@ -55,7 +57,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           {project.results?.length ? (
             <div className="ink-panel mt-10 p-6 sm:p-8">
               <p className="label text-[var(--panel-muted)]">
-                {String(resultsIndex).padStart(2, "0")} / Key results
+                <span className="text-[var(--accent-panel)]">
+                  {String(resultsIndex).padStart(2, "0")}
+                </span>{" "}
+                / Key results
               </p>
               <ul className="mt-4">
                 {project.results.map((result, index) => (
@@ -86,7 +91,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
           <section className="rule-strong mt-10 pt-4">
             <p className="label row-muted">
-              {String(stackIndex).padStart(2, "0")} / Tech stack
+              <span className="text-[var(--accent)]">
+                {String(stackIndex).padStart(2, "0")}
+              </span>{" "}
+              / Tech stack
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
@@ -141,7 +149,7 @@ function TextSection({
   return (
     <section className={`rule-strong pt-4 ${className ?? ""}`}>
       <p className="label row-muted">
-        {index} / {title}
+        <span className="text-[var(--accent)]">{index}</span> / {title}
       </p>
       <p className="text-pretty mt-4 max-w-4xl text-lg leading-8">
         {children}

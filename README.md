@@ -11,11 +11,13 @@ I built this site to keep my projects, research experience, resume, and contact
 information in one place. The portfolio is statically generated with Next.js
 and uses typed local data, so project and experience content can be updated
 without a database or content management system. It also includes a grounded
-AI assistant at `/ask` that answers questions about my projects, experience,
-and resume from the site's own content.
+AI assistant, available as a site-wide floating widget and at `/ask`, that
+answers questions about my projects, experience, and resume from the site's
+own content.
 
-The interface uses a monochrome visual system with strong typography, grid
-details, clear borders, responsive layouts, and light and dark themes.
+The interface uses a near-monochrome visual system with one accent color,
+strong typography, grid details, clear borders, responsive layouts, and light
+and dark themes.
 
 ## Projects
 
@@ -62,10 +64,10 @@ responsibilities, tools, and relevant repository links.
 - Typed content models for projects, experience, profile, skills, and resume
 - Keyboard navigation, visible focus states, semantic markup, and reduced-motion
   support
-- Grounded AI assistant at `/ask`: RAG-lite retrieval over the site's typed
-  content — build-time embeddings, cosine top-k with a similarity-gated
-  refusal, citation validation, per-IP rate limiting; falls back to
-  full-context when retrieval is unavailable
+- Grounded AI assistant, as a site-wide floating widget and at `/ask`:
+  RAG-lite retrieval over the site's typed content — build-time embeddings,
+  cosine top-k with a similarity-gated refusal, citation validation, per-IP
+  rate limiting; falls back to full-context when retrieval is unavailable
 - Martian Mono and IBM Plex Sans, self-hosted via `next/font`
 
 ## Tech Stack

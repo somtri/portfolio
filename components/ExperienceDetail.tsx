@@ -43,7 +43,10 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
 
           {hasPipeline ? (
             <div className="ink-panel mt-10 p-6 sm:p-8">
-              <p className="label text-[var(--panel-muted)]">03 / Pipeline</p>
+              <p className="label text-[var(--panel-muted)]">
+                <span className="text-[var(--accent-panel)]">03</span> /
+                Pipeline
+              </p>
               <ol className="mt-4 grid gap-0 md:grid-cols-3">
                 {experience.pipeline!.map((step, index) => (
                   <li
@@ -51,7 +54,7 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
                     className="flex items-start justify-between gap-3 border-t border-[var(--panel-line)] py-3 pr-4 font-mono text-xs font-medium uppercase leading-5 tracking-wider md:border-t-0 md:border-l md:pl-4 md:first:border-l-0"
                   >
                     <span>{step}</span>
-                    <span className="text-[var(--panel-muted)]">
+                    <span className="text-[var(--accent-panel)]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </li>
@@ -62,7 +65,10 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
 
           <section className="rule-strong mt-10 pt-4">
             <p className="label row-muted">
-              {String(workedIndex).padStart(2, "0")} / What I worked on
+              <span className="text-[var(--accent)]">
+                {String(workedIndex).padStart(2, "0")}
+              </span>{" "}
+              / What I worked on
             </p>
             <ul className="mt-4">
               {experience.bullets.map((bullet) => (
@@ -82,7 +88,10 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
 
           <section className="rule-strong mt-10 pt-4">
             <p className="label row-muted">
-              {String(toolsIndex).padStart(2, "0")} / Tools and topics
+              <span className="text-[var(--accent)]">
+                {String(toolsIndex).padStart(2, "0")}
+              </span>{" "}
+              / Tools and topics
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {experience.techStack.map((tech) => (
@@ -155,7 +164,7 @@ function TextSection({
   return (
     <section className={`rule-strong pt-4 ${className ?? ""}`}>
       <p className="label row-muted">
-        {index} / {title}
+        <span className="text-[var(--accent)]">{index}</span> / {title}
       </p>
       <p className="text-pretty mt-4 max-w-4xl text-lg leading-8">
         {children}
