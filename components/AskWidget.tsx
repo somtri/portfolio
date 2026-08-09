@@ -4,23 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import Link from "next/link";
 import { SUGGESTED_QUESTIONS, useAsk } from "@/components/useAsk";
-
-const RESUME_HREF = "/resume.pdf";
-
-type EasterEgg = {
-  kind: "resume" | "help" | "unknown";
-  raw: string;
-};
-
-function easterEggText(egg: EasterEgg): string {
-  if (egg.kind === "resume") {
-    return "Opening the resume PDF…";
-  }
-  if (egg.kind === "help") {
-    return "som --resume   open the resume PDF\nsom --help     show this help";
-  }
-  return "unknown flag: try 'som --help'";
-}
+import {
+  RESUME_HREF,
+  detectEasterEgg,
+  easterEggText,
+  type EasterEgg,
+} from "@/components/askEasterEgg";
 
 export function AskWidget() {
   const {
@@ -68,20 +57,16 @@ export function AskWidget() {
     }
 
     const trimmed = question.trim();
+    const detected = detectEasterEgg(trimmed);
 
-    if (/^som\s+--/i.test(trimmed)) {
+    if (detected) {
       setResult(null);
       setError(null);
 
-      const trimmedLower = trimmed.toLowerCase();
-      if (/^som\s+--resume\s*$/i.test(trimmedLower)) {
+      if (detected.kind === "resume") {
         window.open(RESUME_HREF, "_blank", "noreferrer");
-        setEgg({ kind: "resume", raw: trimmed });
-      } else if (/^som\s+--help\s*$/i.test(trimmedLower)) {
-        setEgg({ kind: "help", raw: trimmed });
-      } else {
-        setEgg({ kind: "unknown", raw: trimmed });
       }
+      setEgg(detected);
       return;
     }
 
