@@ -17,14 +17,14 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black bg-[var(--nav-background)] backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[var(--line-strong)] bg-[var(--nav-bg)] backdrop-blur">
       <div className="site-container flex min-h-16 flex-wrap items-center justify-between gap-3 py-3">
         <Link
           href="/"
           className="group flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.16em]"
           aria-label="Som Tripathi home"
         >
-          <span className="grid h-8 w-8 place-items-center border border-black bg-black text-white transition group-hover:bg-white group-hover:text-black">
+          <span className="grid h-8 w-8 place-items-center border border-[var(--line-strong)] bg-[var(--panel-bg)] text-[var(--panel-text)] transition group-hover:bg-[var(--surface)] group-hover:text-[var(--ink)]">
             ST
           </span>
           <span className="hidden sm:inline">Som Tripathi</span>

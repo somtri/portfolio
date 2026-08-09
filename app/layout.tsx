@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PageMotion } from "@/components/PageMotion";
+import { martianMono, plexSans } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light" suppressHydrationWarning>
+    <html
+      lang="en"
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${plexSans.variable} ${martianMono.variable}`}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{

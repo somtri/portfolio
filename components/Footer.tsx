@@ -3,32 +3,32 @@ import { profile } from "@/data/profile";
 
 export function Footer() {
   return (
-    <footer className="site-footer border-t border-zinc-700 py-5">
+    <footer className="ink-panel border-t border-[var(--panel-line)] py-5">
       <div className="site-container flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
-        <p className="font-mono text-xs font-bold tracking-[0.16em] text-zinc-400">
+        <p className="font-mono text-xs tracking-[0.16em] text-[var(--panel-muted)]">
           {profile.name} · {profile.location} · {profile.university}
         </p>
         <nav
           aria-label="Footer navigation"
-          className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-zinc-400"
+          className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs tracking-[0.16em] text-[var(--panel-muted)]"
         >
-          <Link href="/projects" className="site-footer-link">
+          <Link href="/projects" className="footer-link">
             Projects
           </Link>
-          <Link href="/experience" className="site-footer-link">
+          <Link href="/experience" className="footer-link">
             Experience
           </Link>
-          <Link href="/resume" className="site-footer-link">
+          <Link href="/resume" className="footer-link">
             Resume
           </Link>
-          <Link href="/contact" className="site-footer-link">
+          <Link href="/contact" className="footer-link">
             Contact
           </Link>
           <a
             href={profile.links.linkedin.href}
             target="_blank"
             rel="noreferrer"
-            className="site-footer-link"
+            className="footer-link"
           >
             LinkedIn
           </a>
@@ -36,7 +36,7 @@ export function Footer() {
             href={profile.links.github.href}
             target="_blank"
             rel="noreferrer"
-            className="site-footer-link"
+            className="footer-link"
           >
             GitHub
           </a>
