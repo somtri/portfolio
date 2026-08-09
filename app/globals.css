@@ -14,6 +14,9 @@
   --panel-text: #f2f0e9;
   --panel-muted: #a8a59c;
   --panel-line: #3a3934;
+  --accent: #2547f4;
+  --on-accent: #fbfaf6;
+  --accent-panel: #2e4ef4;
   color-scheme: light;
 }
 
@@ -31,7 +34,33 @@ html[data-theme="dark"] {
   --panel-text: #11110f;
   --panel-muted: #5f5e58;
   --panel-line: #c9c6bc;
+  --accent: #5e77f7;
+  --on-accent: #11110f;
+  --accent-panel: #2547f4;
   color-scheme: dark;
+}
+
+:root {
+  --ease-spring: linear(
+    0,
+    0.32 8%,
+    0.6 16%,
+    0.79 24%,
+    0.9 32%,
+    0.965 40%,
+    1.005 50%,
+    1.015 58%,
+    1.008 68%,
+    1.002 78%,
+    1 88%,
+    1
+  );
+}
+
+@supports not (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }
 
 @theme inline {
@@ -125,12 +154,32 @@ body {
 }
 
 .index-row {
+  position: relative;
   border-bottom: 1px solid var(--line);
+  transition: transform 200ms var(--ease-spring);
+}
+
+.index-row::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent-panel);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms var(--ease-spring);
 }
 
 .index-row:hover {
   background: var(--panel-bg);
   color: var(--panel-text);
+  transform: translateY(-2px);
+}
+
+.index-row:hover::after {
+  transform: scaleX(1);
 }
 
 .index-row:hover .row-muted {
@@ -165,9 +214,9 @@ body {
 
 .nav-link--active,
 .nav-link--active:hover {
-  background: var(--panel-bg);
-  color: var(--panel-text);
-  border-color: var(--panel-bg);
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
 }
 
 .button-link--solid {
@@ -278,12 +327,12 @@ a {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 :focus-visible {
-  outline: 3px solid var(--ink);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -298,13 +347,13 @@ a {
 
 .motion-ready [data-reveal] {
   transition-property: opacity, transform;
-  transition-duration: 400ms;
-  transition-timing-function: ease;
+  transition-duration: 280ms;
+  transition-timing-function: var(--ease-spring);
 }
 
 .motion-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(1.5rem);
+  transform: translateY(1rem);
 }
 
 .motion-ready [data-reveal].is-visible {
