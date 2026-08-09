@@ -371,85 +371,58 @@ a {
   z-index: 90;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.625rem;
-  height: 2.75rem;
+  height: 50px;
+  max-width: 400px;
+  overflow: hidden;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   background: var(--surface);
   color: var(--ink);
-  padding-inline: 1.125rem;
+  padding: 0 22px;
   cursor: pointer;
+  font-family: var(--font-hack), monospace;
+  font-size: 13px;
   transition:
-    width 250ms var(--ease-spring),
-    padding-inline 250ms var(--ease-spring),
-    gap 250ms var(--ease-spring),
+    max-width 280ms var(--ease-spring),
+    padding 280ms var(--ease-spring),
     background-color 260ms ease,
     border-color 260ms ease,
     color 260ms ease;
 }
 
-.ask-pill__dot {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  background: var(--surface);
+.ask-pill--dot {
+  min-width: 50px;
+  max-width: 50px;
+  padding: 0;
 }
 
-.ask-pill__dot::before {
-  content: "";
-  width: 0.3rem;
-  height: 0.55rem;
+.ask-pill--hidden {
+  visibility: hidden;
+}
+
+.ask-pill__caret {
+  display: inline-block;
+  width: 10px;
+  height: 16px;
   background: var(--accent);
 }
 
 .ask-pill__label {
-  overflow: hidden;
-  max-width: 14rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
   white-space: nowrap;
-  font-family: var(--font-hack), monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  transition:
-    max-width 250ms var(--ease-spring),
-    opacity 200ms var(--ease-spring);
 }
 
-.ask-pill--dot-only {
-  width: 2.75rem;
-  gap: 0;
-  padding-inline: 0;
-  justify-content: center;
-}
-
-.ask-pill--dot-only .ask-pill__label {
-  max-width: 0;
-  opacity: 0;
-}
-
-@media (max-width: 639px) {
-  .ask-pill {
-    width: 2.75rem;
-    gap: 0;
-    padding-inline: 0;
-    justify-content: center;
-  }
-
-  .ask-pill .ask-pill__label {
-    max-width: 0;
-    opacity: 0;
-  }
+.ask-pill__prompt {
+  color: var(--accent);
 }
 
 .ask-dialog {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  inset: auto 1.25rem 1.25rem auto;
   z-index: 90;
   width: min(400px, calc(100vw - 2rem));
   max-width: none;
@@ -463,22 +436,27 @@ a {
 }
 
 .ask-dialog[open] {
-  animation: ask-dialog-in 250ms var(--ease-spring);
+  animation: ask-dialog-in 300ms var(--ease-spring);
 }
 
 @keyframes ask-dialog-in {
-  from {
+  0% {
     opacity: 0;
-    transform: scale(0.85);
+    border-radius: 2rem;
+    transform: scale(0.12);
   }
-  to {
+  33% {
     opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    border-radius: 0;
     transform: scale(1);
   }
 }
 
 .ask-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .ask-dialog__body {
@@ -486,11 +464,16 @@ a {
   overflow-y: auto;
 }
 
+/* the answer region must stay in the DOM for aria-live, but an empty one
+   should not paint as a hollow bordered band */
+.ask-dialog [aria-live]:empty {
+  padding-block: 0;
+  border-top: none;
+}
+
 @media (max-width: 639px) {
   .ask-dialog {
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: auto 0 0 0;
     width: 100%;
     max-height: 85vh;
     border-right: none;
