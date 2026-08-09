@@ -25,9 +25,14 @@ const LABELS = [
   "will code for coffee_",
   "talk data to me_",
   "what's som building rn?_",
-  "why quant finance?_",
+  "what stack does som use?_",
   "curious about the cv research?_",
   "som --resume_",
+  "it compiles, ship it_",
+  "0 bugs (that i know of)_",
+  "deploys on fridays_",
+  "ask about the negative result_",
+  "the answers are cited, relax_",
 ];
 
 const DOT_HOLD_MS = 1500;

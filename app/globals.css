@@ -292,7 +292,7 @@ a {
 }
 
 .page-section {
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(4rem, 8vw, 6rem);
 }
 
 .motion-ready [data-reveal] {
@@ -373,17 +373,17 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  height: 50px;
-  max-width: 400px;
+  height: 42px;
+  max-width: 360px;
   overflow: hidden;
   border: 1px solid var(--line-strong);
   border-radius: 0;
   background: var(--surface);
   color: var(--ink);
-  padding: 0 22px;
+  padding: 0 16px;
   cursor: pointer;
   font-family: var(--font-hack), monospace;
-  font-size: 13px;
+  font-size: 12.5px;
   transition:
     max-width 280ms var(--ease-spring),
     padding 280ms var(--ease-spring),
@@ -393,8 +393,8 @@ a {
 }
 
 .ask-pill--dot {
-  min-width: 50px;
-  max-width: 50px;
+  min-width: 42px;
+  max-width: 42px;
   padding: 0;
 }
 
@@ -404,8 +404,8 @@ a {
 
 .ask-pill__caret {
   display: inline-block;
-  width: 10px;
-  height: 16px;
+  width: 8px;
+  height: 13px;
   background: var(--accent);
 }
 

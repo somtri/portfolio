@@ -114,7 +114,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="site-container pt-20 pb-4 sm:pt-28 sm:pb-6">
+      <section className="site-container pt-16 pb-4 sm:pt-24">
         <p className="text-sm text-[var(--muted)]">
           <span className="text-[var(--accent)]">$</span> fortune{" "}
           <span className="text-[var(--faint)]">
@@ -128,7 +128,7 @@ export default function Home() {
         <p className="text-sm text-[var(--muted)]">
           <span className="text-[var(--accent)]">$</span> som --ask
         </p>
-        <div className="mt-4">
+        <div className="mt-9">
           <AskRepl />
         </div>
       </section>
