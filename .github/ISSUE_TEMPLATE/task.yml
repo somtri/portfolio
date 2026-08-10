@@ -1,0 +1,37 @@
+name: Task
+description: A unit of planned work.
+labels: ["task"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One sentence. What is true when this is done.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What this covers, and what it deliberately does not.
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      description: The checks that must pass, named specifically.
+      value: |
+        - [ ] `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` all pass
+        - [ ]
+    validations:
+      required: true
+
+  - type: input
+    id: decision
+    attributes:
+      label: Decision ledger entry
+      description: The DECISIONS.md entry this serves, if any.
+      placeholder: D-018

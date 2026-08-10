@@ -1,0 +1,40 @@
+name: Bug report
+description: Something on the site behaves incorrectly.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open /projects
+        2. Toggle to light mode
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: route
+    attributes:
+      label: Route
+      placeholder: /projects/runscope
+
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      options: [dark, light, both]
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Chrome 141 on Windows 11 / Safari on iPhone 15
