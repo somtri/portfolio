@@ -142,11 +142,6 @@ textarea {
   border-top: 1px solid var(--line-strong);
 }
 
-.ink-panel {
-  background: var(--panel-bg);
-  color: var(--panel-text);
-}
-
 .index-row {
   position: relative;
   border-bottom: 1px solid var(--line);
@@ -262,10 +257,6 @@ a {
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
-}
-
-.ink-panel :focus-visible {
-  outline-color: var(--accent-panel);
 }
 
 .site-container {
