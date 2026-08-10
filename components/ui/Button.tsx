@@ -18,7 +18,7 @@ export function Button({
   download,
 }: ButtonProps) {
   const styles = cn(
-    "button-link inline-flex min-h-11 items-center justify-center gap-2 border px-4 py-2.5 font-mono text-xs font-medium uppercase tracking-[0.1em] transition duration-150",
+    "button-link inline-flex min-h-11 items-center justify-center gap-2 border px-4 py-2.5 font-mono text-xs font-medium tracking-[0.04em] transition duration-150",
     variant === "solid" && "button-link--solid",
     variant === "outline" && "button-link--outline",
     variant === "quiet" && "button-link--quiet px-2",

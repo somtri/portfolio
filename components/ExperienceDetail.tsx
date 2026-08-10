@@ -51,7 +51,7 @@ export function ExperienceDetail({ experience }: ExperienceDetailProps) {
                 {experience.pipeline!.map((step, index) => (
                   <li
                     key={step}
-                    className="flex items-start justify-between gap-3 border-t border-[var(--panel-line)] py-3 pr-4 font-mono text-xs font-medium uppercase leading-5 tracking-wider md:border-t-0 md:border-l md:pl-4 md:first:border-l-0"
+                    className="flex items-start justify-between gap-3 border-t border-[var(--panel-line)] py-3 pr-4 font-mono text-xs font-medium leading-5 tracking-[0.04em] md:border-t-0 md:border-l md:pl-4 md:first:border-l-0"
                   >
                     <span>{step}</span>
                     <span className="text-[var(--accent-panel)]">

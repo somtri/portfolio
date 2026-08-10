@@ -68,7 +68,7 @@ responsibilities, tools, and relevant repository links.
   RAG-lite retrieval over the site's typed content — build-time embeddings,
   cosine top-k with a similarity-gated refusal, citation validation, per-IP
   rate limiting; falls back to full-context when retrieval is unavailable
-- Martian Mono and IBM Plex Sans, self-hosted via `next/font`
+- Hack and Space Grotesk, self-hosted via `next/font`
 
 ## Tech Stack
 

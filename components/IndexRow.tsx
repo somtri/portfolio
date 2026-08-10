@@ -28,7 +28,7 @@ export function IndexRow({
     >
       <span className="label row-muted">{num}</span>
       <span>
-        <span className="block font-mono text-base font-bold uppercase tracking-[-0.02em] sm:text-lg">
+        <span className="block font-mono text-base font-bold tracking-[-0.01em] sm:text-lg">
           {title}
         </span>
         {sub ? (

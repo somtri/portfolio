@@ -128,31 +128,16 @@ textarea {
 }
 
 .label {
-  font-family: var(--font-martian), monospace;
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.display-name {
-  font-family: var(--font-martian), monospace;
-  font-weight: 800;
-  font-stretch: 80%;
-  font-size: clamp(3rem, 10vw, 7.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .page-title {
-  font-family: var(--font-martian), monospace;
-  font-weight: 800;
-  font-stretch: 87.5%;
+  font-weight: 700;
   font-size: clamp(2.25rem, 5vw, 4rem);
   line-height: 0.95;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
 
 .rule {

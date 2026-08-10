@@ -11,7 +11,7 @@ export function Tag({ children, inverse = false, className }: TagProps) {
   return (
     <span
       className={cn(
-        "font-mono text-[0.6875rem] font-medium tracking-[0.12em] uppercase border border-current px-2 py-1 inline-flex items-center",
+        "font-mono text-[0.6875rem] font-medium tracking-[0.04em] border border-current px-2 py-1 inline-flex items-center",
         inverse ? "ink-panel" : "bg-transparent text-current",
         className,
       )}

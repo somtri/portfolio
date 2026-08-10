@@ -42,7 +42,7 @@ export function AskAssistant() {
         <button
           type="submit"
           disabled={loading}
-          className="button-link button-link--solid inline-flex min-h-11 items-center px-4 font-mono text-xs font-medium uppercase tracking-[0.1em]"
+          className="button-link button-link--solid inline-flex min-h-11 items-center px-4 font-mono text-xs font-medium tracking-[0.04em]"
         >
           Ask
         </button>
