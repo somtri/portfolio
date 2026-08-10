@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { ProjectIndex } from "@/components/ProjectIndex";
+import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -12,10 +13,11 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHeader
-        title="Selected technical projects."
+        command="ls -la ./projects"
+        annotation={`${projects.length} records`}
         summary="Software projects across real-time monitoring, financial machine learning, systems programming, static web architecture, predictive modeling, and economic forecasting."
       />
-      <section className="site-container pb-20">
+      <section className="site-container pb-24">
         <ProjectIndex />
       </section>
     </>

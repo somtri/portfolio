@@ -11,7 +11,7 @@ export function ProjectIndex({ limit, startNum = 1 }: ProjectIndexProps) {
     typeof limit === "number" ? projects.slice(0, limit) : projects;
 
   return (
-    <div className="rule-strong">
+    <div>
       {visible.map((project, index) => {
         const position = startNum + index;
 

@@ -17,7 +17,7 @@ export function ExperienceIndex({
   const visible = typeof limit === "number" ? sorted.slice(0, limit) : sorted;
 
   return (
-    <div className="rule-strong">
+    <div>
       {visible.map((experience, index) => {
         const position = startNum + index;
         const year = experience.startDate.split("-")[0];

@@ -12,7 +12,7 @@ export default function AskPage() {
   return (
     <>
       <PageHeader
-        title="Ask about the work."
+        command="som --ask"
         summary={
           "A grounded assistant that answers from this site's project, experience, and resume content — and says \"I don't know\" otherwise."
         }

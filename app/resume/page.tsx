@@ -12,7 +12,7 @@ export default function ResumePage() {
   return (
     <>
       <PageHeader
-        title="The concise version of the work."
+        command="cat ./resume"
         summary="A structured web version of my education, research experience, selected projects, and core technical skills."
       />
       <section className="site-container pb-20">

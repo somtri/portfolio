@@ -24,26 +24,23 @@ export function IndexRow({
       href={href}
       data-reveal
       style={{ transitionDelay: `${delayMs ?? 0}ms` }}
-      className="index-row group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 px-2 py-4 md:grid-cols-[3.5rem_1fr_auto_4rem_1.5rem]"
+      className="group grid grid-cols-1 gap-2 border-t border-[var(--line)] px-1 py-5 text-sm last:border-b hover:bg-[var(--surface)] focus-visible:bg-[var(--surface)] sm:grid-cols-[3rem_200px_1fr_150px_60px] sm:items-baseline sm:gap-7"
     >
-      <span className="label row-muted">{num}</span>
-      <span>
-        <span className="block font-mono text-base font-bold tracking-[-0.01em] sm:text-lg">
-          {title}
-        </span>
-        {sub ? (
-          <span className="row-muted mt-1 block max-w-2xl text-sm leading-6">
-            {sub}
-          </span>
-        ) : null}
+      <span className="text-[11px] text-[var(--faint)]">{num}</span>
+      <span className="font-bold text-[var(--accent)] group-hover:text-[var(--ink)] group-focus-visible:text-[var(--ink)]">
+        {title}
       </span>
+      {sub ? (
+        <span className="text-[13.5px] text-[var(--muted)]">{sub}</span>
+      ) : (
+        <span />
+      )}
       {meta ? (
-        <span className="label row-muted hidden md:block">{meta}</span>
-      ) : null}
-      {year ? <span className="label">{year}</span> : null}
-      <span aria-hidden="true" className="hidden text-sm md:block">
-        →
-      </span>
+        <span className="text-[11px] tracking-[0.04em] text-[var(--faint)]">{meta}</span>
+      ) : (
+        <span />
+      )}
+      <span className="text-[12px] text-[var(--faint)] sm:text-right">{year ?? ""}</span>
     </Link>
   );
 }
