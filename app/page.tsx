@@ -5,8 +5,12 @@ import { experiences } from "@/data/experience";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { formatExperienceDate, sortExperiences } from "@/lib/experience";
+import { getFortuneTail } from "@/lib/fortune";
 
-export default function Home() {
+export const revalidate = 604800;
+
+export default async function Home() {
+  const tail = await getFortuneTail();
   const sortedExperiences = sortExperiences(experiences);
   const currentExperience =
     sortedExperiences.find((experience) => experience.current) ??
@@ -121,7 +125,7 @@ export default function Home() {
             [ rotates weekly · sourced from the week&apos;s ai/ml/quant news ]
           </span>
         </p>
-        <Fortune />
+        <Fortune tail={tail} />
       </section>
 
       <section className="site-container pt-16 pb-20 sm:pt-24 sm:pb-28">
