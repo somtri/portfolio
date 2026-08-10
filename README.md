@@ -1,5 +1,7 @@
 # My Portfolio
 
+[![CI](https://github.com/somtri/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/somtri/portfolio/actions/workflows/ci.yml)
+
 My personal portfolio for software engineering, applied AI, quantitative
 research, research software, and data systems work.
 
@@ -15,9 +17,10 @@ AI assistant, available as a site-wide floating widget and at `/ask`, that
 answers questions about my projects, experience, and resume from the site's
 own content.
 
-The interface uses a near-monochrome visual system with one accent color,
-strong typography, grid details, clear borders, responsive layouts, and light
-and dark themes.
+The interface reads as a linux session: dark by default, lowercase throughout,
+Hack for every line of terminal text, one accent blue, coordinate annotations
+in the margins, and ruled rows instead of cards. A toggle switches it to the
+light theme, and the browser tab icon follows the toggle.
 
 ## Projects
 
@@ -125,7 +128,7 @@ pnpm typecheck  # Run the TypeScript compiler
 pnpm test       # Run the Vitest test suite
 pnpm build      # Create an optimized production build
 pnpm start      # Run the production build locally
-pnpm embed      # embed the content corpus (needs Cloudflare env vars; optional — site falls back to full-context)
+pnpm embed      # Embed the content corpus (needs Cloudflare env vars; commit both output files)
 ```
 
 ## Deployment
@@ -145,12 +148,20 @@ route, `/api/ask`, for the assistant. No database.
   `EMBEDDINGS_API_TOKEN`, `EMBEDDINGS_MODEL` — scoped to Production (and
   Preview if I want it there too). These are server-side only; no key is ever
   exposed to the browser.
-- I can run `pnpm embed` locally (with the same env vars in `.env.local`) and
-  commit nothing — `lib/assistant/vectors.json` is gitignored. Without it the
-  assistant runs in full-context mode; with it, retrieval activates. To
-  activate retrieval in production, `pnpm embed` needs to run during the
-  build — that's a follow-up I still need to wire into the build command, not
-  part of this pass.
+- I run `pnpm embed` locally with the same values in `.env.local`, then commit
+  both `lib/assistant/vectors.json` and `lib/assistant/vectors.meta.json`. The
+  runtime reads the vectors from disk on Vercel, so they have to be in the
+  repo. `pnpm embed` deliberately does not run during the Vercel build: that
+  would make the build depend on Cloudflare and on secrets, and the build is
+  meant to succeed offline with no environment variables.
+- Any edit to `data/*.ts` invalidates the committed vectors. `vectors.meta.json`
+  records a hash of the corpus they were built from, and a test compares it
+  against the live corpus, so stale embeddings fail a check instead of quietly
+  degrading answers. Re-run `pnpm embed` and commit both files again.
+- Without the embeddings the assistant falls back to full-context mode, which
+  sends the whole corpus with every question — roughly 11k tokens against
+  Groq's free-tier ceiling of 12k per minute. Retrieval is what keeps it inside
+  the free tier, not an optimisation on top.
 - An NVIDIA API key works for local development via the commented base URL in
   `.env.example`, but NVIDIA's API Trial ToS does not permit free-tier
   production use.
@@ -162,4 +173,3 @@ route, `/api/ask`, for the assistant. No database.
 - Add project search and keyboard navigation.
 - Add short technical notes for selected research and quantitative finance projects.
 - Add privacy-friendly analytics to understand which projects visitors engage with.
-- Add optional dark mode after the default monochrome theme is polished.
