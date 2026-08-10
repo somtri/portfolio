@@ -1,6 +1,12 @@
 import { buildContext } from "./context";
 import { buildSystemPrompt } from "./prompt";
 import { validateAnswer } from "./citations";
+import {
+  leaksSystemPrompt,
+  looksLikeInjection,
+  sanitizeQuestion,
+  wrapQuestion,
+} from "./guardrails";
 import { MAX_QUESTION_CHARS, REFUSAL_MESSAGE } from "./constants";
 import { ChatUnavailableError } from "./types";
 import type { Section } from "./types";
@@ -23,6 +29,17 @@ export type HandlerDeps = {
   chat: (opts: { system: string; user: string }) => Promise<string>;
   rateLimit: (ip: string) => { allowed: boolean; retryAfterSec?: number };
 };
+
+type HandlerResult = { status: number; body: AskResponseBody };
+
+// Every guardrail returns the same body. A visitor probing the endpoint
+// learns which questions are answered, never which rule stopped one.
+function refused(): HandlerResult {
+  return {
+    status: 200,
+    body: { answer: REFUSAL_MESSAGE, citations: [], mode: "refused" },
+  };
+}
 
 export async function handleAsk(
   question: unknown,
@@ -52,24 +69,35 @@ export async function handleAsk(
       };
     }
 
-    const context = await buildContext(question, {
+    const clean = sanitizeQuestion(question);
+    if (clean.length === 0) {
+      return {
+        status: 400,
+        body: { error: "Ask one question, up to 500 characters." },
+      };
+    }
+
+    // Screened after the rate limit, so repeated attempts still burn quota,
+    // and before the provider call, so they never cost a request.
+    if (looksLikeInjection(clean)) {
+      return refused();
+    }
+
+    const context = await buildContext(clean, {
       corpus: deps.corpus,
       vectors: deps.vectors,
       embed: deps.embed,
     });
 
     if (context.mode === "refuse") {
-      return {
-        status: 200,
-        body: { answer: REFUSAL_MESSAGE, citations: [], mode: "refused" },
-      };
+      return refused();
     }
 
     const system = buildSystemPrompt(context.sections);
 
     let answer: string;
     try {
-      answer = await deps.chat({ system, user: question });
+      answer = await deps.chat({ system, user: wrapQuestion(clean) });
     } catch (error) {
       if (error instanceof ChatUnavailableError) {
         return {
@@ -80,6 +108,16 @@ export async function handleAsk(
         };
       }
       throw error;
+    }
+
+    // A prompt rule is a request to the model, not a control, so the two
+    // rules worth naming in the prompt are also checked on the way out:
+    // rule 5 here, rule 1 by the citation validator below.
+    if (leaksSystemPrompt(answer)) {
+      return {
+        status: 200,
+        body: { answer: REFUSAL_MESSAGE, citations: [], mode: "rejected" },
+      };
     }
 
     const validation = validateAnswer(answer, deps.known);

@@ -64,7 +64,7 @@ describe("buildContext", () => {
   });
 
   it("falls back to full mode when embedding is unavailable", async () => {
-    const result = await buildContext("question", {
+    const result = await buildContext("which section covers this", {
       corpus,
       vectors,
       embed: async () => {
@@ -76,12 +76,37 @@ describe("buildContext", () => {
   });
 
   it("falls back to full mode when vectors are null", async () => {
-    const result = await buildContext("question", {
+    const result = await buildContext("which section covers this", {
       corpus,
       vectors: null,
       embed: async () => [[1, 0, 0]],
     });
 
     expect(result).toEqual({ mode: "full", sections: corpus });
+  });
+
+  // Full mode has no similarity score to refuse on, so without a lexical
+  // gate every off-topic question would reach the model with the whole
+  // corpus attached.
+  it("refuses in full mode when no content word matches the corpus", async () => {
+    const result = await buildContext("what is the capital of France", {
+      corpus,
+      vectors: null,
+      embed: async () => [[1, 0, 0]],
+    });
+
+    expect(result.mode).toBe("refuse");
+  });
+
+  it("refuses in full mode when the embedding call fails on an off-topic question", async () => {
+    const result = await buildContext("recommend a good pasta recipe", {
+      corpus,
+      vectors,
+      embed: async () => {
+        throw new EmbeddingsUnavailableError("no key");
+      },
+    });
+
+    expect(result.mode).toBe("refuse");
   });
 });
