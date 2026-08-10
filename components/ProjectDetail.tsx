@@ -13,88 +13,91 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
   return (
     <article className="site-container pb-20">
-      <div data-reveal>
-        <p className="label row-muted">
-          [ {project.category}
-          {project.year ? ` / ${project.year}` : ""} ]
+      <header className="pt-16 pb-10 sm:pt-24">
+        <div className="flex flex-col gap-2 text-[11px] text-[var(--faint)] sm:flex-row sm:items-center sm:justify-between sm:text-[11.5px]">
+          <span>
+            [ {project.category}
+            {project.year ? ` · ${project.year}` : ""} ]
+          </span>
+        </div>
+
+        <p className="mt-10 text-sm text-[var(--muted)]">
+          <span className="text-[var(--accent)]" aria-hidden="true">
+            $
+          </span>{" "}
+          cat ./projects/{project.slug}
         </p>
-        <h1 className="page-title text-balance mt-4">{project.title}</h1>
-        <p className="text-pretty row-muted mt-5 max-w-3xl text-xl leading-8">
+
+        <h1 className="mt-5 text-[28px] leading-tight font-bold text-[var(--ink)] sm:text-[34px]">
+          {project.title}
+        </h1>
+
+        <p className="mt-4 max-w-3xl text-[14.5px] leading-7 text-[var(--muted)]">
           {project.oneLine}
         </p>
-        <div className="rule-strong mt-8" />
-      </div>
+      </header>
 
-      <div className="mt-10 grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_15rem]">
+      <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_15rem]">
         <div>
-          <TextSection index="01" title="Overview">
+          <TextSection index="01" title="overview">
             {project.overview}
           </TextSection>
-          <TextSection index="02" title="Problem" className="mt-10">
+          <TextSection index="02" title="problem">
             {project.problem}
           </TextSection>
 
-          <section className="rule-strong mt-10 pt-4">
-            <p className="label row-muted">
-              <span className="text-[var(--accent)]">03</span> / What I built
+          <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+            <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+              <span className="text-[var(--accent)]">[03]</span> what i built
             </p>
             <ul className="mt-4">
               {project.built.map((item) => (
                 <li
                   key={item}
-                  className="rule grid grid-cols-[auto_1fr] gap-3 py-3 leading-7"
+                  className="border-t border-[var(--line)] py-3.5 text-[14.5px] leading-7 text-[var(--muted)] last:border-b"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="mt-2.5 h-1.5 w-1.5 bg-[var(--ink)]"
-                  />
-                  <span>{item}</span>
+                  {item}
                 </li>
               ))}
             </ul>
           </section>
 
           {project.results?.length ? (
-            <div className="ink-panel mt-10 p-6 sm:p-8">
-              <p className="label text-[var(--panel-muted)]">
-                <span className="text-[var(--accent-panel)]">
-                  {String(resultsIndex).padStart(2, "0")}
-                </span>{" "}
-                / Key results
-              </p>
-              <ul className="mt-4">
-                {project.results.map((result, index) => (
-                  <li
-                    key={result}
-                    className={`grid grid-cols-[auto_1fr] gap-3 border-[var(--panel-line)] py-3 leading-7 ${
-                      index === 0 ? "border-t-0" : "border-t"
-                    }`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mt-2.5 h-1.5 w-1.5 bg-[var(--panel-text)]"
-                    />
-                    <span>{result}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+              <div className="border border-[var(--line-strong)] bg-[var(--surface)] p-6 sm:p-8">
+                <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+                  <span className="text-[var(--accent)]">
+                    [{String(resultsIndex).padStart(2, "0")}]
+                  </span>{" "}
+                  key results
+                </p>
+                <ul className="mt-4">
+                  {project.results.map((result) => (
+                    <li
+                      key={result}
+                      className="border-t border-[var(--line)] py-3.5 text-[14.5px] leading-7 text-[var(--muted)] first:border-t-0"
+                    >
+                      {result}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
           ) : null}
 
           <TextSection
             index={String(focusIndex).padStart(2, "0")}
-            title="Technical focus"
-            className="mt-10"
+            title="technical focus"
           >
             {project.technicalFocus}
           </TextSection>
 
-          <section className="rule-strong mt-10 pt-4">
-            <p className="label row-muted">
+          <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+            <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
               <span className="text-[var(--accent)]">
-                {String(stackIndex).padStart(2, "0")}
+                [{String(stackIndex).padStart(2, "0")}]
               </span>{" "}
-              / Tech stack
+              tech stack
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
@@ -106,14 +109,22 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
         <aside className="self-start lg:sticky lg:top-24">
           <dl>
-            <div className="rule pt-3 [&:not(:first-child)]:mt-3">
-              <dt className="label row-muted">Category</dt>
-              <dd className="mt-1 text-sm leading-6">{project.category}</dd>
+            <div className="border-t border-[var(--line)] pt-3 [&:not(:first-child)]:mt-3">
+              <dt className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+                category
+              </dt>
+              <dd className="mt-1 text-sm text-[var(--muted)]">
+                {project.category}
+              </dd>
             </div>
             {project.year ? (
-              <div className="rule pt-3 [&:not(:first-child)]:mt-3">
-                <dt className="label row-muted">Year</dt>
-                <dd className="mt-1 text-sm leading-6">{project.year}</dd>
+              <div className="border-t border-[var(--line)] pt-3 [&:not(:first-child)]:mt-3">
+                <dt className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+                  year
+                </dt>
+                <dd className="mt-1 text-sm text-[var(--muted)]">
+                  {project.year}
+                </dd>
               </div>
             ) : null}
           </dl>
@@ -125,7 +136,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </aside>
       </div>
 
-      <div className="rule-strong mt-12 flex flex-wrap gap-3 pt-6">
+      <div className="mt-12 flex flex-wrap gap-3 border-t border-[var(--line)] pt-6">
         <Button href={project.links.github}>GitHub</Button>
         <Button href="/projects" variant="outline">
           Back to projects
@@ -138,20 +149,18 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 function TextSection({
   index,
   title,
-  className,
   children,
 }: {
   index: string;
   title: string;
-  className?: string;
   children: string;
 }) {
   return (
-    <section className={`rule-strong pt-4 ${className ?? ""}`}>
-      <p className="label row-muted">
-        <span className="text-[var(--accent)]">{index}</span> / {title}
+    <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+      <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+        <span className="text-[var(--accent)]">[{index}]</span> {title}
       </p>
-      <p className="text-pretty mt-4 max-w-4xl text-lg leading-8">
+      <p className="mt-4 max-w-4xl text-[14.5px] leading-7 text-[var(--muted)]">
         {children}
       </p>
     </section>
