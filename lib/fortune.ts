@@ -1,25 +1,26 @@
 import { chatComplete } from "./assistant/chat";
 
-// Curated fallback tails — completes "currently training models and arguing
-// with ___". Ships live until API keys land in Vercel, and every failure
-// path in getFortuneTail() falls back here. Content owner-curated.
+// Curated fallback tails — each completes "currently training models and
+// ___", so the whole predicate rotates, not just its object. Ships live until
+// API keys land in Vercel, and every failure path in getFortuneTail() falls
+// back here. Content owner-curated.
 export const CURATED_TAILS: readonly string[] = [
-  "opus 5",
-  "a stack trace",
-  "an out-of-memory error",
-  "a stubborn merge conflict",
-  "a flaky p-value",
-  "last week's commits",
-  "a race condition",
-  "an off-by-one error",
-  "a nondeterministic test",
-  "a stale cache",
-  "a rogue null pointer",
-  "a leaky abstraction",
-  "a silent type coercion",
-  "a broken build",
-  "a rate limit",
-  "a cursed regex",
+  "arguing with opus 5",
+  "losing to a race condition",
+  "waiting on a cold build",
+  "re-running one flaky test",
+  "blaming the cache",
+  "rereading my own commits",
+  "negotiating with a gpu queue",
+  "chasing an off-by-one",
+  "apologizing to the type checker",
+  "untangling a cursed regex",
+  "watching a loss curve flatline",
+  "waiting on one more epoch",
+  "debugging the data not the model",
+  "arguing with a stack trace",
+  "trusting one more random seed",
+  "reading docs that lied",
 ] as const;
 
 const HN_KEYWORDS = [
@@ -48,9 +49,10 @@ const HN_TIMEOUT_MS = 4000;
 const ONE_WEEK_SECONDS = 7 * 24 * 60 * 60;
 
 const FORTUNE_SYSTEM_PROMPT =
-  'Given one news headline, reply with a 1-4 word noun phrase that completes ' +
-  '"currently training models and arguing with ___". Lowercase, no ' +
-  "punctuation, no quotes, no explanation — the phrase only.";
+  "Given one news headline, reply with a 2-6 word phrase that completes " +
+  '"currently training models and ___". Start with a verb ending in -ing, ' +
+  "e.g. \"arguing with opus 5\". Lowercase, no punctuation, no quotes, no " +
+  "explanation — the phrase only.";
 
 /**
  * ISO-8601 week number + week-year for a given date, computed in UTC.
@@ -96,12 +98,12 @@ const VALID_TAIL_PATTERN = /^[a-z0-9 .'+#-]+$/;
 export function isValidTail(value: string): boolean {
   const trimmed = value.trim();
 
-  if (trimmed.length < 2 || trimmed.length > 28) {
+  if (trimmed.length < 4 || trimmed.length > 40) {
     return false;
   }
 
   const words = trimmed.split(/\s+/);
-  if (words.length < 1 || words.length > 4) {
+  if (words.length < 2 || words.length > 6) {
     return false;
   }
 

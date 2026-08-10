@@ -34,17 +34,22 @@ describe("pickCuratedTail", () => {
 
 describe("isValidTail", () => {
   it("accepts a good quip", () => {
-    expect(isValidTail("a stack trace")).toBe(true);
+    expect(isValidTail("arguing with opus 5")).toBe(true);
+    expect(isValidTail("losing to a race condition")).toBe(true);
   });
 
-  it("rejects a value over 28 characters", () => {
-    expect(isValidTail("a very long winded philosophical debate")).toBe(
-      false,
-    );
+  it("rejects a value over 40 characters", () => {
+    expect(
+      isValidTail("arguing interminably with several stubborn benchmarks"),
+    ).toBe(false);
   });
 
-  it("rejects more than 4 words", () => {
-    expect(isValidTail("a b c d e")).toBe(false);
+  it("rejects more than 6 words", () => {
+    expect(isValidTail("a b c d e f g")).toBe(false);
+  });
+
+  it("rejects a single word - the phrase must follow 'and'", () => {
+    expect(isValidTail("opus")).toBe(false);
   });
 
   it("rejects uppercase", () => {
@@ -63,6 +68,15 @@ describe("isValidTail", () => {
   it("rejects an empty value", () => {
     expect(isValidTail("")).toBe(false);
     expect(isValidTail("   ")).toBe(false);
+  });
+
+  // The curated list is hand-edited by the owner. If an entry stops passing
+  // the gate, the model-generated path would accept phrases the curated
+  // fallback itself could not - so hold both to one standard.
+  it("accepts every curated tail", () => {
+    for (const tail of CURATED_TAILS) {
+      expect(isValidTail(tail), tail).toBe(true);
+    }
   });
 });
 
