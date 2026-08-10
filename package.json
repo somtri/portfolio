@@ -13,7 +13,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --configLoader runner --root .",
-    "embed": "tsx scripts/embed-corpus.ts"
+    "embed": "node --env-file-if-exists=.env.local --import tsx scripts/embed-corpus.ts"
   },
   "dependencies": {
     "next": "16.2.7",

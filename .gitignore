@@ -47,5 +47,7 @@ next-env.d.ts
 /.claude/
 /.memsearch/
 
-# generated assistant embeddings (build-time artifact; full-context fallback covers its absence)
-/lib/assistant/vectors.json
+# NOTE: lib/assistant/vectors.json is deliberately NOT ignored. It is generated
+# by `pnpm embed`, but the runtime reads it from disk on Vercel, so ignoring it
+# meant retrieval silently degraded to the full-context fallback in production.
+# Commit it together with vectors.meta.json, whose hash a test checks for drift.
