@@ -1,7 +1,19 @@
 import { topK } from "./similarity";
 import { TOP_K, MIN_SIMILARITY } from "./constants";
+import { hasCorpusOverlap } from "./guardrails";
 import { EmbeddingsUnavailableError } from "./types";
 import type { Section, ContextResult } from "./types";
+
+// Full context is the fallback when there are no embeddings to rank against,
+// so there is no similarity score to refuse on. A lexical check stands in for
+// it: without it, every off-topic question would reach the model with the
+// whole corpus attached, and the citation validator would be the only guard
+// left standing.
+function fullContext(question: string, corpus: Section[]): ContextResult {
+  return hasCorpusOverlap(question, corpus)
+    ? { mode: "full", sections: corpus }
+    : { mode: "refuse" };
+}
 
 export async function buildContext(
   question: string,
@@ -12,7 +24,7 @@ export async function buildContext(
   },
 ): Promise<ContextResult> {
   if (deps.vectors === null) {
-    return { mode: "full", sections: deps.corpus };
+    return fullContext(question, deps.corpus);
   }
 
   let questionVector: number[];
@@ -21,7 +33,7 @@ export async function buildContext(
     questionVector = vector;
   } catch (error) {
     if (error instanceof EmbeddingsUnavailableError) {
-      return { mode: "full", sections: deps.corpus };
+      return fullContext(question, deps.corpus);
     }
     throw error;
   }
