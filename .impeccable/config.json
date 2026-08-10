@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "reason": "Owner confirmed Space Grotesk for display moments only (D-012, 2026-08-09)",
+        "createdAt": "2026-08-09T06:54:53.083Z"
+      }
+    ]
+  }
+}

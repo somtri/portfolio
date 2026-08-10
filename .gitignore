@@ -43,9 +43,13 @@ next-env.d.ts
 
 # session/working files (local only)
 /handoff.md
+/HANDOFF-*.md
 /STATE.md
 /.claude/
 /.memsearch/
+
+# impeccable: the detector config is shared, its cache is not
+/.impeccable/hook.cache.json
 
 # NOTE: lib/assistant/vectors.json is deliberately NOT ignored. It is generated
 # by `pnpm embed`, but the runtime reads it from disk on Vercel, so ignoring it
