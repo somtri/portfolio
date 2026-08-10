@@ -11,9 +11,6 @@
   --faint: rgba(0, 0, 0, 0.45);
   --live: #0a7a46;
   /* legacy v2 tokens - retired during v3 rollout */
-  --soft: #f3f3f3;
-  --grid-line: transparent;
-  --nav-bg: rgba(255, 255, 255, 0.92);
   --panel-bg: #000000;
   --panel-text: #ffffff;
   --panel-muted: rgba(255, 255, 255, 0.7);
@@ -34,9 +31,6 @@ html[data-theme="dark"] {
   --faint: rgba(255, 255, 255, 0.42);
   --live: #2ee58a;
   /* legacy v2 tokens - retired during v3 rollout */
-  --soft: #1f1f1f;
-  --grid-line: transparent;
-  --nav-bg: rgba(0, 0, 0, 0.92);
   --panel-bg: #ffffff;
   --panel-text: #000000;
   --panel-muted: rgba(0, 0, 0, 0.68);
@@ -280,20 +274,13 @@ a {
   padding-block: clamp(4rem, 8vw, 6rem);
 }
 
-.motion-ready [data-reveal] {
-  transition-property: opacity, transform;
-  transition-duration: 280ms;
-  transition-timing-function: var(--ease-spring);
-}
-
+/* Hidden start state only. PageMotion animates each target in with the Web
+   Animations API, which writes no attributes and so cannot collide with
+   hydration; the inline transition-delay staggered rows carry is read there
+   as the animation delay. */
 .motion-ready [data-reveal] {
   opacity: 0;
   transform: translateY(1rem);
-}
-
-.motion-ready [data-reveal].is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .theme-transitioning *,

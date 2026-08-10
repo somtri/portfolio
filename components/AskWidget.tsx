@@ -226,6 +226,7 @@ export function AskWidget() {
             <input
               id="ask-widget-input"
               name="question"
+              aria-label="ask a question about som"
               type="text"
               maxLength={500}
               value={question}
