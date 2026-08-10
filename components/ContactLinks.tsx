@@ -39,51 +39,55 @@ const items = [
 
 export function ContactLinks() {
   return (
-    <div className="grid border-l border-t border-[var(--line)] md:grid-cols-2">
+    <div>
       {items.map((item, index) => {
+        const nn = String(index + 1).padStart(2, "0");
+        const href = item.placeholder ? undefined : item.href;
+        const isLink = Boolean(href);
         const content = (
           <>
-            <div className="label flex items-center justify-between">
-              <span>{item.key}</span>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-            </div>
-            <p className="mt-8 text-lg font-semibold">{item.label}</p>
-            <p className="row-muted group-hover:text-[var(--panel-muted)] mt-2 text-sm">
+            <span className="text-[11px] text-[var(--faint)]">{nn}</span>
+            <span className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+              {item.key}
+            </span>
+            {/* The accent marks what is clickable. A row that is only a
+                value - location - stays ink, so it never reads as a link
+                that does nothing when clicked. */}
+            <span
+              className={
+                isLink
+                  ? "font-bold text-[var(--accent)] group-hover:text-[var(--ink)] group-focus-visible:text-[var(--ink)]"
+                  : "font-bold text-[var(--ink)]"
+              }
+            >
+              {item.label}
+            </span>
+            <span className="text-[11px] text-[var(--faint)] sm:text-right">
               {item.note}
-            </p>
-            <div className="label rule mt-6 flex items-center justify-between pt-3">
-              <span>
-                {item.key === "Location"
-                  ? "Ames, Iowa"
-                  : item.placeholder
-                    ? "Pending"
-                    : "Open"}
-              </span>
-              {!item.placeholder ? <span aria-hidden="true">↗</span> : null}
-            </div>
+            </span>
           </>
         );
 
-        if (!item.href || item.placeholder) {
+        if (!href) {
           return (
             <div
               key={item.key}
-              className="group border-b border-r border-[var(--line)] bg-[var(--surface)] p-6"
+              className="grid grid-cols-1 gap-2 border-t border-[var(--line)] px-1 py-5 text-sm last:border-b sm:grid-cols-[3rem_140px_1fr_auto] sm:items-baseline sm:gap-7"
             >
               {content}
             </div>
           );
         }
 
-        const external = item.href.startsWith("http");
+        const external = href.startsWith("http");
 
         return (
           <a
             key={item.key}
-            href={item.href}
+            href={href}
             target={external ? "_blank" : undefined}
             rel={external ? "noreferrer" : undefined}
-            className="group border-b border-r border-[var(--line)] bg-[var(--surface)] p-6 hover:bg-[var(--panel-bg)] hover:text-[var(--panel-text)]"
+            className="group grid grid-cols-1 gap-2 border-t border-[var(--line)] px-1 py-5 text-sm last:border-b hover:bg-[var(--surface)] focus-visible:bg-[var(--surface)] sm:grid-cols-[3rem_140px_1fr_auto] sm:items-baseline sm:gap-7"
           >
             {content}
           </a>

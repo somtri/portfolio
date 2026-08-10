@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
-import { AskAssistant } from "@/components/AskAssistant";
+import { AskRepl } from "@/components/AskRepl";
 
 export const metadata: Metadata = {
   title: "Ask",
@@ -18,7 +18,7 @@ export default function AskPage() {
         }
       />
       <section className="site-container pb-20">
-        <AskAssistant />
+        <AskRepl />
       </section>
     </>
   );
