@@ -3,6 +3,7 @@ import { AskWidget } from "@/components/AskWidget";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PageMotion } from "@/components/PageMotion";
+import { TabIcon } from "@/components/TabIcon";
 import {
   SITE_DESCRIPTION,
   SITE_NAME,
@@ -58,6 +59,7 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-screen flex-col">
         <PageMotion />
+        <TabIcon />
         <a
           href="#main-content"
           className="fixed left-4 top-4 z-[100] -translate-y-24 border border-[var(--line-strong)] bg-[var(--surface)] px-4 py-2 text-xs font-bold text-[var(--ink)] tracking-wider focus:translate-y-0"

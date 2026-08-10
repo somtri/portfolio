@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <!--
+    The site mark, light theme. Same traced path as icon-dark.svg; only the
+    paper and accent values differ. Keep the two files in step: the path is
+    generated, not hand-drawn (scratchpad brand/measure.js).
+  -->
+  <rect fill="#ffffff" width="96" height="96" />
+  <path fill="#0b76cc" d="M29 28.81 L67 43.75 L67 52.25 L29 67.19 L29 58.19 L57.63 48 L29 37.81 Z" />
+</svg>
