@@ -6,59 +6,59 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/", label: "About" },
-  { href: "/experience", label: "Experience" },
-  { href: "/projects", label: "Projects" },
-  { href: "/resume", label: "Resume" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", index: "0", label: "index" },
+  { href: "/projects", index: "1", label: "work" },
+  { href: "/experience", index: "2", label: "experience" },
+  { href: "/resume", index: "3", label: "resume" },
+  { href: "/contact", index: "4", label: "contact" },
+  { href: "/ask", index: "?", label: "ask" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black bg-[var(--nav-background)] backdrop-blur">
-      <div className="site-container flex min-h-16 flex-wrap items-center justify-between gap-3 py-3">
-        <Link
-          href="/"
-          className="group flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.16em]"
-          aria-label="Som Tripathi home"
-        >
-          <span className="grid h-8 w-8 place-items-center border border-black bg-black text-white transition group-hover:bg-white group-hover:text-black">
-            ST
-          </span>
-          <span className="hidden sm:inline">Som Tripathi</span>
+    <header className="sticky top-0 z-50 bg-[var(--paper)]">
+      <div className="site-container flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] py-4 text-xs text-[var(--muted)]">
+        <Link href="/" aria-label="home">
+          <span className="font-bold text-[var(--ink)]">som@portfolio</span>
+          : ~
         </Link>
-
-        <nav aria-label="Main navigation">
-          <ul className="flex flex-wrap items-center justify-end gap-x-1 gap-y-2">
-            {navItems.map((item) => {
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
-
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "nav-link",
-                      active && "nav-link--active",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-            <li>
-              <ThemeToggle />
-            </li>
-          </ul>
-        </nav>
+        <span className="flex flex-wrap items-center gap-5">
+          <span className="text-[var(--faint)]">
+            [ 42.026&deg;n 93.646&deg;w &middot; ames, ia ]
+          </span>
+          <ThemeToggle />
+        </span>
       </div>
+      <nav
+        aria-label="Main navigation"
+        className="site-container flex flex-wrap gap-x-7 gap-y-2 border-b border-[var(--line)] py-4 text-xs text-[var(--muted)]"
+      >
+        {navItems.map((item) => {
+          const active =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "inline-flex items-center gap-2",
+                active && "text-[var(--ink)]",
+              )}
+            >
+              <span className="font-bold text-[var(--accent)]">
+                [{item.index}]
+              </span>
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
     </header>
   );
 }

@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader
-        title="Contact and profiles."
+        command="cat ./contact"
         summary="Email, LinkedIn, GitHub, resume, and current location."
       />
       <section className="site-container pb-20">

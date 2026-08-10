@@ -1,46 +1,22 @@
 import Link from "next/link";
-import { profile } from "@/data/profile";
 
 export function Footer() {
   return (
-    <footer className="site-footer border-t border-zinc-700 py-5">
-      <div className="site-container flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
-        <p className="font-mono text-xs font-bold tracking-[0.16em] text-zinc-400">
-          {profile.name} · {profile.location} · {profile.university}
+    <footer className="rule pb-24 pt-16 sm:py-20">
+      <div className="site-container sm:pr-18">
+        <p className="text-sm text-[var(--muted)]">
+          <span className="text-[var(--accent)]">$</span> contact --open
         </p>
-        <nav
-          aria-label="Footer navigation"
-          className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-zinc-400"
+        <Link
+          href="/contact"
+          className="font-display mt-6 inline-block border border-[var(--ink)] px-8 py-4 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-4xl"
         >
-          <Link href="/projects" className="site-footer-link">
-            Projects
-          </Link>
-          <Link href="/experience" className="site-footer-link">
-            Experience
-          </Link>
-          <Link href="/resume" className="site-footer-link">
-            Resume
-          </Link>
-          <Link href="/contact" className="site-footer-link">
-            Contact
-          </Link>
-          <a
-            href={profile.links.linkedin.href}
-            target="_blank"
-            rel="noreferrer"
-            className="site-footer-link"
-          >
-            LinkedIn
-          </a>
-          <a
-            href={profile.links.github.href}
-            target="_blank"
-            rel="noreferrer"
-            className="site-footer-link"
-          >
-            GitHub
-          </a>
-        </nav>
+          connect
+        </Link>
+        <div className="mt-12 flex flex-wrap justify-between gap-x-8 gap-y-2 text-xs text-[var(--faint)]">
+          <span>[ somtripathi.dev &middot; next.js &middot; static + one api route ]</span>
+          <span>[ answers cite their sources &middot; 42.026&deg;n 93.646&deg;w ]</span>
+        </div>
       </div>
     </footer>
   );

@@ -7,27 +7,128 @@ type ProjectDetailProps = {
 };
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
+  const resultsIndex = project.results?.length ? 4 : null;
+  const focusIndex = resultsIndex ? 5 : 4;
+  const stackIndex = focusIndex + 1;
+
   return (
     <article className="site-container pb-20">
-      <div className="grid gap-5 lg:grid-cols-[1fr_18rem]">
-        <div className="border border-black bg-[var(--surface)] p-6 sm:p-10">
-          <h1 className="text-balance font-mono text-4xl font-black uppercase leading-[0.95] tracking-[-0.055em] sm:text-6xl">
-            {project.title}
-          </h1>
-          <p className="text-pretty mt-6 max-w-3xl text-xl leading-8 text-[var(--muted)]">
-            {project.oneLine}
-          </p>
+      <header className="pt-16 pb-10 sm:pt-24">
+        <div className="flex flex-col gap-2 text-[11px] text-[var(--faint)] sm:flex-row sm:items-center sm:justify-between sm:text-[11.5px]">
+          <span>
+            [ {project.category}
+            {project.year ? ` · ${project.year}` : ""} ]
+          </span>
         </div>
 
-        <aside className="flex flex-col border border-black bg-black p-6 text-white">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-zinc-400">
-            Project index
-          </p>
-          <dl className="mt-6 space-y-5">
-            <MetaItem label="Category" value={project.category} />
-            {project.year ? <MetaItem label="Year" value={project.year} /> : null}
+        <p className="mt-10 text-sm text-[var(--muted)]">
+          <span className="text-[var(--accent)]" aria-hidden="true">
+            $
+          </span>{" "}
+          cat ./projects/{project.slug}
+        </p>
+
+        <h1 className="mt-5 text-[28px] leading-tight font-bold text-[var(--ink)] sm:text-[34px]">
+          {project.title}
+        </h1>
+
+        <p className="mt-4 max-w-3xl text-[14.5px] leading-7 text-[var(--muted)]">
+          {project.oneLine}
+        </p>
+      </header>
+
+      <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_15rem]">
+        <div>
+          <TextSection index="01" title="overview">
+            {project.overview}
+          </TextSection>
+          <TextSection index="02" title="problem">
+            {project.problem}
+          </TextSection>
+
+          <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+            <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+              <span className="text-[var(--accent)]">[03]</span> what i built
+            </p>
+            <ul className="mt-4">
+              {project.built.map((item) => (
+                <li
+                  key={item}
+                  className="border-t border-[var(--line)] py-3.5 text-[14.5px] leading-7 text-[var(--muted)] last:border-b"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {project.results?.length ? (
+            <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+              <div className="border border-[var(--line-strong)] bg-[var(--surface)] p-6 sm:p-8">
+                <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+                  <span className="text-[var(--accent)]">
+                    [{String(resultsIndex).padStart(2, "0")}]
+                  </span>{" "}
+                  key results
+                </p>
+                <ul className="mt-4">
+                  {project.results.map((result) => (
+                    <li
+                      key={result}
+                      className="border-t border-[var(--line)] py-3.5 text-[14.5px] leading-7 text-[var(--muted)] first:border-t-0"
+                    >
+                      {result}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          ) : null}
+
+          <TextSection
+            index={String(focusIndex).padStart(2, "0")}
+            title="technical focus"
+          >
+            {project.technicalFocus}
+          </TextSection>
+
+          <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+            <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+              <span className="text-[var(--accent)]">
+                [{String(stackIndex).padStart(2, "0")}]
+              </span>{" "}
+              tech stack
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <Tag key={tech}>{tech}</Tag>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <aside className="self-start lg:sticky lg:top-24">
+          <dl>
+            <div className="border-t border-[var(--line)] pt-3 [&:not(:first-child)]:mt-3">
+              <dt className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+                category
+              </dt>
+              <dd className="mt-1 text-sm text-[var(--muted)]">
+                {project.category}
+              </dd>
+            </div>
+            {project.year ? (
+              <div className="border-t border-[var(--line)] pt-3 [&:not(:first-child)]:mt-3">
+                <dt className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+                  year
+                </dt>
+                <dd className="mt-1 text-sm text-[var(--muted)]">
+                  {project.year}
+                </dd>
+              </div>
+            ) : null}
           </dl>
-          <div className="mt-auto pt-8">
+          <div className="mt-6">
             <Button href={project.links.github} className="w-full">
               GitHub
             </Button>
@@ -35,92 +136,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </aside>
       </div>
 
-      <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
-        <TextSection index="01" title="Overview">
-          {project.overview}
-        </TextSection>
-        <TextSection index="02" title="Problem">
-          {project.problem}
-        </TextSection>
-      </div>
-
-      <section className="mt-12 border-t border-black pt-5">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-          03 / What I built
-        </p>
-        <ul className="mt-6 grid gap-4 md:grid-cols-2">
-          {project.built.map((item) => (
-            <li
-              key={item}
-              className="grid grid-cols-[auto_1fr] gap-3 border border-black bg-[var(--surface)] p-5 leading-7"
-            >
-              <span aria-hidden="true" className="mt-2.5 h-2 w-2 bg-black" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {project.results?.length ? (
-        <section className="mt-12 border border-black bg-black p-6 text-white sm:p-8">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-zinc-400">
-            04 / Key results
-          </p>
-          <ul className="mt-6 grid gap-4 md:grid-cols-2">
-            {project.results.map((result) => (
-              <li
-                key={result}
-                className="grid grid-cols-[auto_1fr] gap-3 border border-zinc-600 p-5 leading-7"
-              >
-                <span
-                  aria-hidden="true"
-                  className="mt-2.5 h-2 w-2 bg-white"
-                />
-                <span>{result}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      <section className="mt-12 border-t border-black pt-5">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-          {project.results?.length ? "05" : "04"} / Technical focus
-        </p>
-        <p className="text-pretty mt-4 max-w-4xl text-lg leading-8">
-          {project.technicalFocus}
-        </p>
-      </section>
-
-      <section className="mt-12 border border-black bg-[var(--surface)] p-6 sm:p-8">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-          {project.results?.length ? "06" : "05"} / Tech stack
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </div>
-      </section>
-
-      <div className="mt-10 flex flex-wrap gap-3 border-t border-black pt-6">
+      <div className="mt-12 flex flex-wrap gap-3 border-t border-[var(--line)] pt-6">
         <Button href={project.links.github}>GitHub</Button>
         <Button href="/projects" variant="outline">
           Back to projects
         </Button>
       </div>
     </article>
-  );
-}
-
-function MetaItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-b border-zinc-700 pb-4">
-      <dt className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.16em] text-zinc-500">
-        {label}
-      </dt>
-      <dd className="mt-2 text-sm leading-6">{value}</dd>
-    </div>
   );
 }
 
@@ -134,11 +156,13 @@ function TextSection({
   children: string;
 }) {
   return (
-    <section className="border-t border-black pt-5">
-      <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-        {index} / {title}
+    <section className="mt-12 border-t border-[var(--line)] pt-5 first:mt-0">
+      <p className="text-[11px] tracking-[0.04em] text-[var(--faint)]">
+        <span className="text-[var(--accent)]">[{index}]</span> {title}
       </p>
-      <p className="text-pretty mt-4 text-lg leading-8">{children}</p>
+      <p className="mt-4 max-w-4xl text-[14.5px] leading-7 text-[var(--muted)]">
+        {children}
+      </p>
     </section>
   );
 }

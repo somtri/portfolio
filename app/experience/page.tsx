@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { ExperienceTimeline } from "@/components/ExperienceTimeline";
+import { ExperienceIndex } from "@/components/ExperienceIndex";
 import { PageHeader } from "@/components/PageHeader";
+import { experiences } from "@/data/experience";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -12,11 +13,12 @@ export default function ExperiencePage() {
   return (
     <>
       <PageHeader
-        title="Research, engineering, and teaching in practice."
+        command="ls -la ./experience"
+        annotation={`${experiences.length} records`}
         summary="Select a role to explore the research context, methods, pipeline, tools, and concrete contributions behind the work."
       />
-      <section className="site-container pb-20">
-        <ExperienceTimeline />
+      <section className="site-container pb-24">
+        <ExperienceIndex />
       </section>
     </>
   );

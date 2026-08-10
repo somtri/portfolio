@@ -1,22 +1,24 @@
 type PageHeaderProps = {
-  title: string;
+  command: string;
   summary: string;
+  annotation?: string;
 };
 
-export function PageHeader({ title, summary }: PageHeaderProps) {
+export function PageHeader({ command, summary, annotation }: PageHeaderProps) {
   return (
-    <header
-      data-reveal
-      className="site-container pb-12 pt-14 sm:pb-16 sm:pt-20"
-    >
-      <div className="border border-black bg-[var(--surface)] p-6 shadow-[7px_7px_0_var(--shadow)] sm:p-10">
-        <h1 className="text-balance max-w-5xl font-mono text-4xl font-black uppercase leading-[0.96] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
-          {title}
-        </h1>
-        <p className="text-pretty mt-6 max-w-3xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
-          {summary}
-        </p>
+    <header className="site-container pt-16 pb-10 sm:pt-24">
+      <div className="flex flex-col gap-2 text-[11px] text-[var(--faint)] sm:flex-row sm:items-center sm:justify-between sm:text-[11.5px]">
+        <span>[ 42.026&deg;n 93.646&deg;w ]</span>
+        {annotation ? <span>[ {annotation} ]</span> : null}
       </div>
+
+      <h1 className="mt-10 text-sm font-normal text-[var(--muted)]">
+        <span className="text-[var(--accent)]" aria-hidden="true">$</span> {command}
+      </h1>
+
+      <p className="mt-6 max-w-3xl text-[14.5px] leading-7 text-[var(--muted)]">
+        {summary}
+      </p>
     </header>
   );
 }

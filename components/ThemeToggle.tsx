@@ -1,6 +1,7 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useRef, useSyncExternalStore } from "react";
+import { cn } from "@/lib/utils";
 
 type Theme = "light" | "dark";
 
@@ -17,41 +18,72 @@ function getTheme(): Theme {
 
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getTheme, () => "light");
+  const lightRef = useRef<HTMLButtonElement>(null);
+  const darkRef = useRef<HTMLButtonElement>(null);
 
-  function toggleTheme() {
-    const nextTheme: Theme = theme === "light" ? "dark" : "light";
+  function setTheme(nextTheme: Theme, buttonEl: HTMLButtonElement | null) {
+    if (nextTheme === theme) return;
     const root = document.documentElement;
 
+    const applyTheme = () => {
+      root.dataset.theme = nextTheme;
+      window.localStorage.setItem("portfolio-theme", nextTheme);
+      window.dispatchEvent(new Event(themeEvent));
+    };
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (
+      !reduceMotion &&
+      typeof document.startViewTransition === "function" &&
+      document.visibilityState === "visible" &&
+      buttonEl
+    ) {
+      const rect = buttonEl.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const radius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
+      );
+      root.style.setProperty("--vt-x", `${x}px`);
+      root.style.setProperty("--vt-y", `${y}px`);
+      root.style.setProperty("--vt-radius", `${radius}px`);
+      const transition = document.startViewTransition(applyTheme);
+      transition.finished.catch(() => {});
+      return;
+    }
+
     root.classList.add("theme-transitioning");
-    root.dataset.theme = nextTheme;
-    window.localStorage.setItem("portfolio-theme", nextTheme);
-    window.dispatchEvent(new Event(themeEvent));
+    applyTheme();
 
     window.setTimeout(() => {
       root.classList.remove("theme-transitioning");
     }, 350);
   }
 
-  const isDark = theme === "dark";
-
   return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={isDark}
-      aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
-      title={`Switch to ${isDark ? "light" : "dark"} theme`}
-      onClick={toggleTheme}
-      className="theme-toggle"
-    >
-      <span className="sr-only">
-        {isDark ? "Dark theme active" : "Light theme active"}
-      </span>
-      <span aria-hidden="true" className="theme-toggle__track">
-        <span className="theme-toggle__sun">L</span>
-        <span className="theme-toggle__moon">D</span>
-        <span className="theme-toggle__thumb" />
-      </span>
-    </button>
+    <span className="inline-flex items-center gap-0" role="group" aria-label="Theme">
+      <button
+        ref={lightRef}
+        type="button"
+        aria-pressed={theme === "light"}
+        onClick={() => setTheme("light", lightRef.current)}
+        className={cn("mode-pill", theme === "light" && "mode-pill--active")}
+      >
+        light
+      </button>
+      <button
+        ref={darkRef}
+        type="button"
+        aria-pressed={theme === "dark"}
+        onClick={() => setTheme("dark", darkRef.current)}
+        className={cn("mode-pill", theme === "dark" && "mode-pill--active")}
+      >
+        dark
+      </button>
+    </span>
   );
 }
