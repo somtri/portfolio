@@ -210,28 +210,31 @@ textarea {
   border-color: var(--ink);
 }
 
+/* Terminal register: outlined by default, filled only on hover. The v2
+   solid button painted --panel-bg, which is a white slab in dark mode and
+   the loudest thing on any page carrying one. Filled state uses --paper on
+   --accent: 4.67:1 dark, 4.69:1 light (white-on-accent measures 4.50:1 in
+   dark, which sits exactly on the AA threshold for this 12px text). */
 .button-link--solid {
-  border-color: var(--panel-bg);
-  background: var(--panel-bg);
-  color: var(--panel-text);
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
 }
 
 .button-link--solid:hover {
-  background: var(--surface);
-  color: var(--ink);
-  border-color: var(--line-strong);
+  background: var(--accent);
+  color: var(--paper);
 }
 
 .button-link--outline {
   border-color: var(--line-strong);
-  background: var(--surface);
+  background: transparent;
   color: var(--ink);
 }
 
 .button-link--outline:hover {
-  background: var(--panel-bg);
-  color: var(--panel-text);
-  border-color: var(--panel-bg);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .button-link--quiet {
