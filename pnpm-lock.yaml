@@ -10,13 +10,13 @@ importers:
     dependencies:
       next:
         specifier: 16.3.0
-        version: 16.3.0(@babel/core@7.29.7)(@types/node@26.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 16.3.0(@babel/core@7.29.7)(@types/node@26.2.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react:
-        specifier: 19.2.4
-        version: 19.2.4
+        specifier: 19.2.8
+        version: 19.2.8
       react-dom:
-        specifier: 19.2.4
-        version: 19.2.4(react@19.2.4)
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -34,8 +34,8 @@ importers:
         specifier: ^9.39.1
         version: 9.39.5(jiti@2.7.0)
       eslint-config-next:
-        specifier: 16.2.7
-        version: 16.2.7(@typescript-eslint/parser@8.66.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3)
+        specifier: 16.3.0
+        version: 16.3.0(@typescript-eslint/parser@8.66.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3)
       tailwindcss:
         specifier: ^4
         version: 4.3.3
@@ -452,6 +452,12 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
+  '@eslint-community/eslint-utils@4.9.1':
+    resolution: {integrity: sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
+
   '@eslint-community/regexpp@4.12.2':
     resolution: {integrity: sha512-EriSTlt5OC9/7SXkRSCAhfSxxoSUgBm33OH+IkwbdpgoqsSsUg7y3uh+IICI/Qg4BBWr3U2i39RpmycbxMq4ew==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
@@ -699,8 +705,8 @@ packages:
   '@next/env@16.3.0':
     resolution: {integrity: sha512-o9r1S0BNiNreHP9Vs+Qnqd9kviDkJh8xIACY7UFZSmiGbbQRzPBBosvHzAU4TULHOIuOj/18RSsyz2qrREmIFw==}
 
-  '@next/eslint-plugin-next@16.2.7':
-    resolution: {integrity: sha512-VbS+QgMHqvIDMTIqD2xMBKK1otIpdAUKA8VLHFwR9h6OfU/mOm7w/69nQcvdmI8hCk99Wr2AsGLn/PJ/tMHw1w==}
+  '@next/eslint-plugin-next@16.3.0':
+    resolution: {integrity: sha512-OqgJ8PN0d04KcPhDX/PTY5tJUJZxlbrt7O7FBsm4XE0XW2JDrKnDXsc9uo9WUimJGPoo2j+JRGhyXApC//mvbw==}
 
   '@next/swc-darwin-arm64@16.3.0':
     resolution: {integrity: sha512-55hpqq18bEVAlxedlTt3tFqZmKg2nUXT1kn1G/BGEy0R13h3LwtwHPVzzjG6P4LLeOHE32PFDQUVaJEWvBEZBw==}
@@ -1525,8 +1531,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-config-next@16.2.7:
-    resolution: {integrity: sha512-CQ2aNXkrsjaGA2oJBE1LYnlRdphIAQE9ZQfX9hSv1PNGPyiOMSaVeBfTIO29QxYz+ij/hZudK0cfpCG1HXWstg==}
+  eslint-config-next@16.3.0:
+    resolution: {integrity: sha512-lPrf1kHsMJEZqO0uXkNB400c5MGrhrTk3BNX7P0ol4gt61+iUlQfjy9TyIOEA9eOXrf+5+mYbT/JsY8+zqUByQ==}
     peerDependencies:
       eslint: '>=9.0.0'
       typescript: '>=3.3.1'
@@ -2252,16 +2258,16 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  react-dom@19.2.4:
-    resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
+  react-dom@19.2.8:
+    resolution: {integrity: sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==}
     peerDependencies:
-      react: ^19.2.4
+      react: ^19.2.8
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react@19.2.4:
-    resolution: {integrity: sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==}
+  react@19.2.8:
+    resolution: {integrity: sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw==}
     engines: {node: '>=0.10.0'}
 
   reflect.getprototypeof@1.0.10:
@@ -2944,6 +2950,11 @@ snapshots:
       eslint: 9.39.5(jiti@2.7.0)
       eslint-visitor-keys: 3.4.3
 
+  '@eslint-community/eslint-utils@4.9.1(eslint@9.39.5(jiti@2.7.0))':
+    dependencies:
+      eslint: 9.39.5(jiti@2.7.0)
+      eslint-visitor-keys: 3.4.3
+
   '@eslint-community/regexpp@4.12.2': {}
 
   '@eslint/config-array@0.21.2':
@@ -3139,9 +3150,12 @@ snapshots:
 
   '@next/env@16.3.0': {}
 
-  '@next/eslint-plugin-next@16.2.7':
+  '@next/eslint-plugin-next@16.3.0(eslint@9.39.5(jiti@2.7.0))':
     dependencies:
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.5(jiti@2.7.0))
       fast-glob: 3.3.1
+    transitivePeerDependencies:
+      - eslint
 
   '@next/swc-darwin-arm64@16.3.0':
     optional: true
@@ -3980,9 +3994,9 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-next@16.2.7(@typescript-eslint/parser@8.66.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3):
+  eslint-config-next@16.3.0(@typescript-eslint/parser@8.66.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3))(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3):
     dependencies:
-      '@next/eslint-plugin-next': 16.2.7
+      '@next/eslint-plugin-next': 16.3.0(eslint@9.39.5(jiti@2.7.0))
       eslint: 9.39.5(jiti@2.7.0)
       eslint-import-resolver-node: 0.3.10
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.5(jiti@2.7.0))
@@ -4621,16 +4635,16 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next@16.3.0(@babel/core@7.29.7)(@types/node@26.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  next@16.3.0(@babel/core@7.29.7)(@types/node@26.2.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@next/env': 16.3.0
       '@swc/helpers': 0.5.15
       baseline-browser-mapping: 2.11.13
       caniuse-lite: 1.0.30001809
       postcss: 8.5.23
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      styled-jsx: 5.1.6(@babel/core@7.29.7)(react@19.2.4)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+      styled-jsx: 5.1.6(@babel/core@7.29.7)(react@19.2.8)
     optionalDependencies:
       '@next/swc-darwin-arm64': 16.3.0
       '@next/swc-darwin-x64': 16.3.0
@@ -4767,14 +4781,14 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-dom@19.2.4(react@19.2.4):
+  react-dom@19.2.8(react@19.2.8):
     dependencies:
-      react: 19.2.4
+      react: 19.2.8
       scheduler: 0.27.0
 
   react-is@16.13.1: {}
 
-  react@19.2.4: {}
+  react@19.2.8: {}
 
   reflect.getprototypeof@1.0.10:
     dependencies:
@@ -5032,10 +5046,10 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-jsx@5.1.6(@babel/core@7.29.7)(react@19.2.4):
+  styled-jsx@5.1.6(@babel/core@7.29.7)(react@19.2.8):
     dependencies:
       client-only: 0.0.1
-      react: 19.2.4
+      react: 19.2.8
     optionalDependencies:
       '@babel/core': 7.29.7
 

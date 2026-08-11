@@ -7,7 +7,20 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
 
+    # ORDER MATTERS. Dependabot puts a dependency in the FIRST group it
+    # matches, so any pattern group has to sit above the broad
+    # dependency-type one. With dev-dependencies listed first it claimed
+    # eslint-config-next, which is a devDependency, and kept proposing it
+    # on its own while next stayed behind.
     groups:
+      # next and eslint-config-next are released together and are meant to
+      # match. Bumping one alone leaves the lint rules describing a
+      # different version of the framework than the one being built.
+      next:
+        patterns:
+          - "next"
+          - "eslint-config-next"
+
       # Minor and patch only. Grouping majors hides a breaking change behind
       # several safe ones: that is how ESLint 10 and TypeScript 7 arrived in
       # one pull request and broke lint and the build together. Majors now
@@ -15,14 +28,6 @@ updates:
       dev-dependencies:
         dependency-type: development
         update-types: ["minor", "patch"]
-
-      # next and eslint-config-next are released in lockstep and are meant to
-      # match. Bumping one alone leaves the lint rules describing a different
-      # version of the framework than the one being built.
-      next:
-        patterns:
-          - "next"
-          - "eslint-config-next"
 
     ignore:
       # Neither major can be used today, and the blocker is upstream in both
