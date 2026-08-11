@@ -183,6 +183,24 @@ describe("handleAsk", () => {
     expect(closers).toBe(1);
   });
 
+  // What the model actually does: it cites the id from the section heading,
+  // fragment and all. Production refused every such answer until the citation
+  // pattern accepted the fragment.
+  it("accepts an answer citing a section by its full fragment id", async () => {
+    const deps = makeDeps({
+      chat: vi.fn(
+        async () => `RunScope monitors uptime [${corpus[0].id}].`,
+      ),
+    });
+    const result = await handleAsk("What is RunScope?", "127.0.0.1", deps);
+    expect(result.status).toBe(200);
+    expect(result.body).toEqual({
+      answer: `RunScope monitors uptime [${corpus[0].id}].`,
+      citations: [{ cite: "projects/runscope", href: "/projects/runscope" }],
+      mode: "full",
+    });
+  });
+
   it("returns 503 when chat is unavailable", async () => {
     const deps = makeDeps({
       chat: vi.fn(async () => {
