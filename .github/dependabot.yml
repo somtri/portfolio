@@ -6,9 +6,37 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+
     groups:
+      # Minor and patch only. Grouping majors hides a breaking change behind
+      # several safe ones: that is how ESLint 10 and TypeScript 7 arrived in
+      # one pull request and broke lint and the build together. Majors now
+      # come one per pull request, so each is reviewable on its own.
       dev-dependencies:
         dependency-type: development
+        update-types: ["minor", "patch"]
+
+      # next and eslint-config-next are released in lockstep and are meant to
+      # match. Bumping one alone leaves the lint rules describing a different
+      # version of the framework than the one being built.
+      next:
+        patterns:
+          - "next"
+          - "eslint-config-next"
+
+    ignore:
+      # Neither major can be used today, and the blocker is upstream in both
+      # cases. Drop the matching entry once its peer range widens.
+      #
+      # typescript-eslint 8.67 peers "typescript >=4.8.4 <6.1.0", and it
+      # throws outright on TS 7. It reaches us through eslint-config-next.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      # eslint-plugin-react 7.37.5 peers "eslint ^3 || ... || ^9.7" and calls
+      # a context API that ESLint 10 removed. eslint-config-next depends on
+      # it, so ESLint 10 cannot lint a Next project yet.
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
